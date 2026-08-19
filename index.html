@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Briefing @advamandareis — Agosto → Outubro 2026</title>
+<meta name="robots" content="noindex, nofollow">
+<title>Painel de Conteúdo — @advamandareis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Space+Mono:wght@400;700&display=swap');
-
 :root{
   --paper: #F5EFE2;
   --paper-card: #FFFDF9;
@@ -17,851 +19,371 @@
   --ink: #241713;
   --ink-soft: #5C4E44;
   --line: #DED0AF;
-  --stamp: #4B3F72;
   --stamp-light: #EFEBF6;
-  --pending: #9C8A66;
+  --pendente: #9C8A66;
+  --pendente-soft: rgba(156,138,102,0.12);
+  --producao: #A9792B;
+  --producao-soft: rgba(169,121,43,0.14);
+  --pronto: #3F6B4A;
+  --pronto-soft: rgba(63,107,74,0.12);
+  --aprovado: #3F6B4A;
+  --alteracao: #8A3B2E;
+  --radius: 12px;
   --shadow: 0 2px 10px rgba(46,8,18,0.08);
 }
-
-*{ box-sizing:border-box; }
-html,body{ margin:0; padding:0; }
+*{ box-sizing:border-box; margin:0; padding:0; }
 body{
-  background: var(--paper);
+  background:
+    radial-gradient(circle at 15% 8%, rgba(169,121,43,0.06), transparent 40%),
+    radial-gradient(circle at 90% 85%, rgba(74,14,27,0.05), transparent 45%),
+    var(--paper);
   color: var(--ink);
   font-family: 'Source Serif 4', serif;
   -webkit-font-smoothing: antialiased;
-  background-image:
-    radial-gradient(circle at 15% 8%, rgba(169,121,43,0.06), transparent 40%),
-    radial-gradient(circle at 90% 85%, rgba(74,14,27,0.05), transparent 45%);
+  min-height: 100vh;
+  padding: 0 0 80px;
 }
 a{ color: inherit; }
-:focus-visible{ outline: 2px solid var(--stamp); outline-offset: 2px; }
+:focus-visible{ outline: 2px solid var(--wine); outline-offset: 2px; }
 
-.page{ max-width: 780px; margin: 0 auto; padding: 0 0 64px; }
-
-/* ---------- HERO ---------- */
-.hero{
-  background: linear-gradient(160deg, var(--wine) 0%, var(--wine-deep) 100%);
-  color: var(--gold-soft);
-  padding: 40px 24px 30px;
+/* ---------- HEADER ---------- */
+header{
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+  padding: 26px clamp(20px, 5vw, 64px);
   border-bottom: 3px solid var(--gold);
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(160deg, var(--wine) 0%, var(--wine-deep) 100%);
+  flex-wrap: wrap;
 }
-.hero::after{
-  content:"";
-  position:absolute; inset:0;
-  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
-  pointer-events:none;
-}
-.hero-eyebrow{
+.brand-text .eyebrow{
   font-family:'Space Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin: 0 0 10px;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600;
 }
-.hero h1{
-  font-family:'Fraunces', serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-size: clamp(28px, 6vw, 40px);
-  line-height: 1.08;
-  margin: 0 0 6px;
-  color: #FBF6EA;
+.brand-text h1{
+  font-family:'Fraunces', serif; font-weight: 700; font-size: clamp(20px, 3vw, 26px);
+  margin-top: 4px; color: #FBF6EA;
 }
-.hero .handle{ color: var(--gold); font-weight: 500; }
-.hero-sub{
-  font-size: 15px;
-  color: var(--gold-soft);
-  margin: 0 0 22px;
-  max-width: 46ch;
-}
-.hero-stats{
-  display:flex; gap: 22px; flex-wrap: wrap;
-  font-family:'Space Mono', monospace;
-}
-.hero-stat{ display:flex; flex-direction:column; gap:2px; }
-.hero-stat b{ font-size: 20px; color:#FBF6EA; }
-.hero-stat span{ font-size: 10px; letter-spacing:0.08em; text-transform:uppercase; color: var(--gold); }
+.brand-text h1 .handle{ color: var(--gold); }
+.header-right{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.updated{ font-family:'Space Mono', monospace; font-size: 12px; color: var(--gold-soft); text-align:right; }
+.updated strong{ color: #FBF6EA; font-weight: 700; }
 
-/* ---------- TOOLS BAR ---------- */
-.tools-bar{
-  display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
-  padding: 10px 24px;
-  background: var(--wine-deep);
-  border-bottom: 1px solid var(--gold);
+.edit-toggle{
+  background: transparent; border: 1px solid var(--gold); color: var(--gold-soft);
+  font-family:'Space Mono', monospace; font-size: 12px; font-weight: 600;
+  padding: 9px 15px; border-radius: 99px; cursor:pointer;
+  display:flex; align-items:center; gap:7px; transition: all .15s ease;
 }
-.sync-badge{
-  font-family:'Space Mono', monospace; font-size: 11px;
-  color: var(--gold-soft);
-}
-.sync-badge.online{ color: #8FD1A6; }
-.sync-badge.local{ color: #E3C878; }
-.sync-badge.error{ color: #E39A8F; }
-.tools-bar .ghost-btn{ border-color: var(--gold); color: var(--gold-soft); }
-.tools-bar .ghost-btn:hover{ background: var(--gold); color: var(--wine-deep); }
-.tools-bar .ghost-btn.active{ background: var(--gold); color: var(--wine-deep); }
+.edit-toggle:hover{ background: var(--gold); color: var(--wine-deep); }
+.edit-toggle.on{ background: var(--gold); color: var(--wine-deep); }
 
-/* ---------- APPROVAL ---------- */
-.approval-card{
-  padding: 20px 24px;
-  background: var(--paper-card);
-  border-bottom: 1px solid var(--line);
+/* ---------- HERO / STATS ---------- */
+.hero{ padding: 36px clamp(20px, 5vw, 64px) 8px; }
+.hero.reels-hero{ margin-top: 34px; padding-top: 50px; border-top: 1px solid var(--line); }
+.section-title{
+  font-family:'Space Mono', monospace; font-size: 11.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; font-weight: 700; color: var(--gold); margin-bottom: 10px;
 }
-.approval-head{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom: 12px; }
-.approval-label{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color: var(--ink-soft); }
-.approval-current{
-  font-family:'Fraunces', serif; font-weight:700; font-size: 14px;
-  padding: 5px 14px; border-radius: 999px;
-  border: 2px dashed var(--pending); color: var(--pending);
+.hero h2{
+  font-family:'Fraunces', serif; font-weight: 700; font-size: clamp(24px, 4vw, 34px); line-height: 1.15;
+  color: var(--wine-deep);
 }
-.approval-current.state-approved{ border-style: solid; border-color:#3F6B4A; color:#3F6B4A; background: rgba(63,107,74,0.08); transform: rotate(-2deg); }
-.approval-current.state-rejected{ border-style: solid; border-color:#8A3B2E; color:#8A3B2E; background: rgba(138,59,46,0.08); transform: rotate(-2deg); }
-.approval-buttons{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 12px; }
-.approval-btn{
-  font-family:'Fraunces', serif; font-weight:600; font-size: 14px;
-  padding: 10px 16px; border-radius: 6px; cursor:pointer;
-  border: 1.5px solid var(--line); background: var(--paper);
-  color: var(--ink);
-}
-.approval-btn.approve.active{ background:#3F6B4A; border-color:#3F6B4A; color:#fff; }
-.approval-btn.reject.active{ background:#8A3B2E; border-color:#8A3B2E; color:#fff; }
-.approval-hint{ font-size: 13px; color: var(--ink-soft); line-height:1.55; margin: 0 0 14px; }
-.approval-hint span{ font-family:'Space Mono',monospace; color: var(--wine); font-weight:700; }
-.approval-actions{ display:flex; gap:10px; flex-wrap:wrap; }
-.ghost-btn{
-  font-family:'Space Mono', monospace; font-size: 12px;
-  background: transparent; border: 1px solid var(--wine); color: var(--wine);
-  padding: 8px 14px; border-radius: 6px; cursor:pointer; text-decoration:none;
-  display:inline-block;
-}
-.ghost-btn:hover{ background: var(--wine); color:#FBF6EA; }
+.hero h2 em{ font-style: normal; color: var(--wine); }
+.hero p{ color: var(--ink-soft); margin-top: 8px; font-size: 14.5px; max-width: 580px; line-height:1.55; }
 
-/* ---------- PROGRESS ---------- */
-.progress-wrap{
-  padding: 18px 24px;
-  background: var(--paper-card);
-  border-bottom: 1px solid var(--line);
-}
-.progress-top{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 8px; }
-.progress-top .label{ font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color: var(--ink-soft); }
-.progress-top .value{ font-family:'Fraunces',serif; font-weight:600; font-size:15px; color: var(--wine); }
-.progress-track{
-  height: 8px; border-radius: 4px; background: var(--stamp-light);
-  overflow:hidden; border: 1px solid var(--line);
-}
-.progress-fill{
-  height:100%; background: linear-gradient(90deg, var(--gold), var(--wine));
-  width:0%; transition: width 0.4s ease;
-}
+.stats{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 26px; }
+.stat{ background: var(--paper-card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); }
+.stat .num{ font-family:'Fraunces', serif; font-size: 26px; font-weight: 700; color: var(--wine-deep); }
+.stat .label{ font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+.stat.pronto .num{ color: var(--pronto); }
+.stat.producao .num{ color: var(--producao); }
 
-/* ---------- TABS / FILTERS ---------- */
-.controls{
-  position: sticky; top:0; z-index: 5;
-  background: var(--paper);
-  padding: 14px 24px 12px;
-  border-bottom: 1px solid var(--line);
+.approval-summary{
+  margin-top: 16px; display:flex; gap: 16px; flex-wrap:wrap;
+  font-family:'Space Mono', monospace; font-size: 12px; color: var(--ink-soft);
 }
-.tabs{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
-.tab{
-  font-family:'Space Mono',monospace;
-  font-size: 12px;
-  background: transparent;
-  border: 1px solid var(--line);
-  color: var(--ink-soft);
-  padding: 7px 12px;
-  border-radius: 999px 999px 0 0;
-  cursor: pointer;
-  display:flex; gap:6px; align-items:baseline;
-  border-bottom-width: 3px;
-}
-.tab .tab-count{ color: var(--gold); }
-.tab.active{
-  background: var(--paper-card);
-  border-color: var(--wine);
-  border-bottom-color: var(--wine);
-  color: var(--wine);
-  font-weight: 700;
-}
-.chips{ display:flex; gap:6px; flex-wrap:wrap; }
-.chip{
-  font-family:'Space Mono',monospace;
-  font-size: 11px;
-  background: var(--paper-card);
-  border: 1px solid var(--line);
-  color: var(--ink-soft);
-  padding: 5px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-}
-.chip.active{ background: var(--stamp); border-color: var(--stamp); color: #fff; }
+.approval-summary b{ color: var(--wine); }
+.approval-summary .ok b{ color: var(--aprovado); }
+.approval-summary .warn b{ color: var(--alteracao); }
 
-/* ---------- POSTS LIST ---------- */
-#postsList{ padding: 16px 24px 0; display:flex; flex-direction:column; gap:14px; }
-.empty{
-  font-family:'Space Mono',monospace; font-size:13px; color: var(--ink-soft);
-  padding: 40px 0; text-align:center;
-}
+/* ---------- PROGRESS TRACK ---------- */
+.track-wrap{ margin-top: 24px; background: var(--paper-card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 22px 18px; box-shadow: var(--shadow); }
+.track-top{ display:flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; flex-wrap:wrap; gap:6px; }
+.track-top .pct{ font-family:'Fraunces', serif; font-weight: 700; font-size: 19px; color: var(--wine-deep); }
+.track-top .pct span{ color: var(--wine); }
+.track-top .track-label{ font-size: 12px; color: var(--ink-soft); font-family:'Space Mono', monospace; }
+.track{ position: relative; height: 8px; border-radius: 99px; background: var(--stamp-light); border: 1px solid var(--line); overflow:hidden; }
+.track-fill{ position:absolute; top:0; left:0; bottom:0; border-radius: 99px; background: linear-gradient(90deg, var(--gold), var(--wine)); transition: width .5s ease; }
+.track-marker{ position:absolute; top: 50%; transform: translate(-50%, -50%); font-size: 15px; transition: left .5s ease; }
 
-.post-card{
-  background: var(--paper-card);
-  border: 1px solid var(--line);
-  border-left: 4px solid var(--pending);
-  border-radius: 6px;
-  box-shadow: var(--shadow);
-  transition: border-color 0.2s ease, background 0.2s ease;
+/* ---------- FILTERS ---------- */
+.filters{ display:flex; gap: 10px; flex-wrap: wrap; padding: 28px clamp(20px, 5vw, 64px) 0; }
+.filter-btn{
+  background: var(--paper-card); border: 1px solid var(--line); color: var(--ink-soft);
+  font-family:'Space Mono', monospace; font-size: 12.5px; font-weight: 600;
+  padding: 8px 15px; border-radius: 99px; cursor:pointer; transition: all .15s ease;
 }
-.post-card.is-done{
-  border-left-color: var(--stamp);
-  background: linear-gradient(180deg, var(--stamp-light) 0%, var(--paper-card) 90px);
-}
+.filter-btn:hover{ color: var(--wine); border-color: var(--wine); }
+.filter-btn.active{ background: var(--wine); border-color: var(--wine); color: #fff; }
 
-.post-header{
-  width:100%;
-  background: transparent;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  padding: 16px 16px 16px 14px;
-  display:grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 12px;
-  align-items: start;
-  font-family: inherit;
-  color: inherit;
+/* ---------- GRID / CARDS ---------- */
+.grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; padding: 18px clamp(20px, 5vw, 64px) 0; }
+.card{
+  background: var(--paper-card); border: 1px solid var(--line); border-left: 4px solid var(--pendente);
+  border-radius: var(--radius); padding: 20px; display:flex; flex-direction:column; gap: 11px;
+  box-shadow: var(--shadow); transition: border-color .15s ease;
 }
-.post-num{
-  font-family:'Space Mono', monospace;
-  font-size: 12px;
-  color: var(--gold);
-  padding-top: 3px;
-}
-.post-header-main{ display:flex; flex-direction:column; gap:6px; min-width:0; }
-.post-date-row{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
-.post-date{
-  font-family:'Space Mono', monospace;
-  font-size: 11px;
-  color: var(--ink-soft);
-}
-.badge{
-  font-family:'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.02em;
-  padding: 2px 8px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  white-space: nowrap;
-}
+.card[data-status="producao"]{ border-left-color: var(--producao); }
+.card[data-status="pronto"]{ border-left-color: var(--pronto); }
+.card.hidden{ display:none; }
+.card.editing{ border-left-color: var(--wine); }
+
+.card-top{ display:flex; align-items:flex-start; justify-content: space-between; gap: 10px; }
+.card-num{ font-family:'Space Mono', monospace; font-weight: 700; font-size: 12px; color: var(--gold); letter-spacing:0.03em; }
+.pill{ font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 99px; white-space: nowrap; font-family:'Space Mono', monospace; }
+.pill.pendente{ background: var(--pendente-soft); color: var(--pendente); border: 1px solid var(--line); }
+.pill.producao{ background: var(--producao-soft); color: var(--producao); border: 1px solid rgba(169,121,43,0.35); }
+.pill.pronto{ background: var(--pronto); color: #fff; }
+
+.card h3{ font-family:'Fraunces', serif; font-size: 16px; font-weight: 600; line-height: 1.32; color: var(--wine-deep); }
+
+.badges-row{ display:flex; flex-wrap:wrap; gap:6px; }
+.badge{ font-family:'Space Mono', monospace; font-size: 10px; letter-spacing:0.02em; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); white-space:nowrap; }
 .format-badge{ background: var(--wine); color:#FBF6EA; border-color: var(--wine); }
-.area-badge{ color: #fff; }
+.area-badge{ color:#fff; }
 .area-trabalhista{ background:#7A5C1E; border-color:#7A5C1E; }
 .area-previdenciario{ background:#2F5D5A; border-color:#2F5D5A; }
 .area-familia{ background:#7A2E3A; border-color:#7A2E3A; }
 .area-sucessoes{ background:#4B3F72; border-color:#4B3F72; }
 .area-eleitoral{ background:#2C4A6E; border-color:#2C4A6E; }
 .area-institucional{ background:#A9792B; border-color:#A9792B; }
+.tag-badge{ background: var(--paper); color: var(--ink-soft); font-style: italic; }
 
-.post-title{
-  font-family:'Fraunces', serif;
-  font-weight: 600;
-  font-size: 16.5px;
-  line-height: 1.3;
-  color: var(--wine-deep);
-}
-.post-tag{
-  font-size: 12px;
-  color: var(--ink-soft);
-  font-style: italic;
-}
+.card .objetivo{ font-size: 13px; color: var(--ink-soft); line-height: 1.5; flex-grow: 1; }
+.card .duracao-note{ font-family:'Space Mono', monospace; font-size: 11px; color: var(--gold); }
 
-.stamp-wrap{ display:flex; align-items:flex-start; }
-.stamp-btn{
-  width: 64px; height: 64px;
-  border-radius: 50%;
-  border: 2px dashed var(--pending);
-  background: transparent;
-  color: var(--pending);
-  cursor: pointer;
-  font-family:'Space Mono', monospace;
-  font-size: 9px;
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  transition: transform 0.15s ease;
-  flex-shrink: 0;
+/* ---------- BRIEFING TOGGLE / DETAIL ---------- */
+.briefing-toggle{
+  background: none; border: none; color: var(--ink-soft); font-family:'Space Mono', monospace;
+  font-size: 12px; font-weight: 600; cursor:pointer; padding:0; display:flex; align-items:center;
+  gap:5px; align-self:flex-start; transition: color .15s ease;
 }
-.stamp-btn:hover{ transform: scale(1.06); border-color: var(--stamp); color: var(--stamp); }
-.stamp-btn.stamped{
-  border: 3px solid var(--stamp);
-  background:
-    radial-gradient(circle at 30% 30%, rgba(75,63,114,0.12), transparent 60%),
-    var(--stamp-light);
-  color: var(--stamp);
-  transform: rotate(-9deg);
-  font-weight: 700;
-  font-size: 10px;
-  animation: stampIn 0.28s cubic-bezier(.36,1.6,.4,1);
-}
-.stamp-btn.stamped:hover{ transform: rotate(-9deg) scale(1.06); }
-@keyframes stampIn{
-  0%{ transform: rotate(-9deg) scale(1.9); opacity:0; }
-  60%{ opacity:1; }
-  100%{ transform: rotate(-9deg) scale(1); opacity:1; }
-}
-.stamp-empty{ display:block; }
-.stamp-ink{ display:block; }
+.briefing-toggle:hover{ color: var(--wine); }
+.briefing-toggle .chevron{ transition: transform .2s ease; font-size:10px; }
+.briefing-toggle.open .chevron{ transform: rotate(180deg); }
 
-/* ---------- BODY / DETAIL ---------- */
-.post-body{
-  display:none;
-  padding: 0 16px 20px 46px;
-  border-top: 1px solid var(--line);
-  margin-top: 2px;
+.briefing-detail{
+  display:none; background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+  padding: 14px; margin-top: 2px; flex-direction:column; gap: 12px;
 }
-.post-card.is-open .post-body{ display:block; padding-top:16px; }
-.post-card.is-open .post-header{ padding-bottom: 8px; }
+.briefing-detail.open{ display:flex; }
+.bd-label{ font-family:'Space Mono', monospace; font-size: 10px; letter-spacing:0.08em; text-transform:uppercase; color: var(--gold); border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+.bd-art{ font-size: 13.5px; line-height:1.6; color: var(--ink); }
+.bd-slide{ background: var(--paper-card); border: 1px solid var(--line); border-radius: 6px; padding: 9px 12px; }
+.bd-slide-t{ font-family:'Fraunces', serif; font-weight: 600; font-size: 13px; color: var(--wine); margin-bottom: 2px; }
+.bd-slide-b{ font-size: 13px; line-height:1.55; color: var(--ink); }
+.bd-caption{ font-size: 13.5px; line-height:1.65; color: var(--ink); white-space: normal; }
+.bd-hashtags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.bd-hashtag{ font-family:'Space Mono', monospace; font-size: 10.5px; color: var(--wine); background: var(--stamp-light); padding: 3px 8px; border-radius: 999px; }
+.bd-resumo{ list-style:none; display:flex; flex-direction:column; gap:6px; }
+.bd-resumo li{ font-size: 13px; color: var(--ink); line-height:1.5; padding-left: 14px; position:relative; }
+.bd-resumo li::before{ content:"—"; position:absolute; left:0; color: var(--gold); }
+.bd-gancho, .bd-cta{ font-size: 13px; line-height:1.55; color: var(--ink); font-style: italic; }
+.bd-gancho b, .bd-cta b{ font-style:normal; font-family:'Space Mono', monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color: var(--gold); display:block; margin-bottom:3px; }
 
-.status-banner{
-  font-family:'Space Mono', monospace;
-  font-size: 12px;
-  padding: 8px 12px;
-  border-radius: 4px;
-  margin-bottom: 16px;
-  display:inline-block;
+/* ---------- CARD FOOTER — ADMIN EDIT ---------- */
+.card-footer{ margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--line); display:flex; flex-direction:column; gap:10px; }
+.edit-controls{ display:flex; flex-direction:column; gap:8px; }
+.edit-row{ display:flex; gap:8px; flex-wrap:wrap; }
+select.edit-input, input.edit-input{
+  flex:1; min-width: 120px; background:#fff; border: 1.5px solid var(--gold); color: var(--ink);
+  font-family:'Source Serif 4', serif; font-size: 13px; padding: 8px 10px; border-radius: 6px; outline:none;
 }
-.status-banner.done{ background: var(--stamp-light); color: var(--stamp); border: 1px solid var(--stamp); }
-.status-banner.pending{ background: transparent; color: var(--pending); border: 1px dashed var(--pending); }
+.btn-save{
+  background: var(--wine); color:#fff; border:none; font-family:'Space Mono', monospace;
+  font-size: 12px; font-weight: 700; padding: 9px 14px; border-radius: 6px; cursor:pointer; white-space:nowrap;
+}
+.btn-save:hover{ opacity:.88; }
+.save-feedback{ font-family:'Space Mono', monospace; font-size: 11px; color: var(--gold); min-height: 14px; }
 
-.detail-block{ margin-bottom: 18px; }
-.detail-label{
-  font-family:'Space Mono', monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 8px;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 4px;
+/* ---------- CLIENT VIEW — APPROVAL ---------- */
+.approval-row{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.approval-status{ font-family:'Space Mono', monospace; font-size:11px; color: var(--ink-soft); }
+.approve-btn{
+  font-family:'Fraunces', serif; font-weight:600; font-size: 13px; padding: 8px 14px; border-radius: 6px;
+  cursor:pointer; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); flex:1; min-width: 120px;
 }
-.detail-art{
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 12px 14px;
+.approve-btn.aprovar.active{ background: var(--aprovado); border-color: var(--aprovado); color:#fff; }
+.approve-btn.alterar.active{ background: var(--alteracao); border-color: var(--alteracao); color:#fff; }
+.comment-box{
+  width:100%; min-height: 62px; resize: vertical; font-family:'Source Serif 4', serif; font-size: 13px;
+  line-height: 1.5; color: var(--ink); background: var(--paper); border: 1.5px dashed var(--gold);
+  border-radius: 6px; padding: 9px 11px;
 }
-.slides{ display:flex; flex-direction:column; gap:10px; }
-.slide{
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 10px 13px;
+.comment-box:focus{ border-style: solid; }
+.comment-box::placeholder{ color: var(--ink-soft); opacity:.75; }
+.btn-link{
+  display:flex; align-items:center; justify-content:center; gap:6px; background: linear-gradient(90deg, var(--gold), var(--wine));
+  color:#fff; text-decoration:none; font-size: 13px; font-weight:600; padding: 10px 14px; border-radius: 8px;
 }
-.slide-t{
-  font-family:'Fraunces', serif;
-  font-weight: 600;
-  font-size: 13.5px;
-  color: var(--wine);
-  margin-bottom: 3px;
-}
-.slide-b{ font-size: 14px; line-height: 1.55; color: var(--ink); }
+.btn-link:hover{ opacity:.88; }
+.status-note{ font-size: 12px; color: var(--ink-soft); text-align:center; display:block; font-family:'Space Mono', monospace; }
 
-.caption{
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: var(--ink);
-  white-space: normal;
+/* ---------- REEL — GOOGLE DOCS BUTTON ---------- */
+.gdoc-btn{
+  display:flex; align-items:center; justify-content:center; gap:8px; background: var(--wine); color:#fff;
+  text-decoration:none; font-family:'Fraunces', serif; font-weight:600; font-size: 13.5px; padding: 12px 14px;
+  border-radius: 8px; transition: background .15s ease;
 }
-.hashtags{ display:flex; flex-wrap:wrap; gap:6px; margin-top: 10px; }
-.hashtag{
-  font-family:'Space Mono', monospace;
-  font-size: 11px;
-  color: var(--wine);
-  background: var(--stamp-light);
-  padding: 3px 8px;
-  border-radius: 999px;
-}
+.gdoc-btn:hover{ background: var(--wine-deep); }
 
-.review-block .comment-box{
-  width: 100%;
-  min-height: 74px;
-  resize: vertical;
-  font-family: 'Source Serif 4', serif;
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1.5px dashed var(--gold);
-  border-radius: 4px;
-  padding: 10px 12px;
-}
-.review-block .comment-box:focus{ border-style: solid; }
-.review-block .comment-box::placeholder{ color: var(--ink-soft); opacity: 0.75; }
+/* ---------- LEGEND ---------- */
+.legend{ display:flex; gap: 20px; flex-wrap:wrap; padding: 26px clamp(20px, 5vw, 64px) 0; font-family:'Space Mono', monospace; font-size: 11.5px; color: var(--ink-soft); }
+.legend-item{ display:flex; align-items:center; gap:7px; }
+.dot{ width:9px; height:9px; border-radius:50%; }
+.dot.pendente{ background: var(--pendente); }
+.dot.producao{ background: var(--producao); }
+.dot.pronto{ background: var(--pronto); }
 
-/* ---------- EDIT MODE FIELDS ---------- */
-.post-card.is-editing{ border-left-color: var(--gold); }
-.edit-field{
-  width: 100%;
-  font-family: inherit;
-  color: var(--ink);
-  background: #fff;
-  border: 1.5px solid var(--gold);
-  border-radius: 4px;
-  padding: 6px 9px;
-  margin-top: 4px;
+/* ---------- FOOTER ---------- */
+footer{
+  margin-top: 56px; padding: 24px clamp(20px, 5vw, 64px) 0; border-top: 1px solid var(--line);
+  font-family:'Space Mono', monospace; font-size: 12px; color: var(--ink-soft); display:flex;
+  justify-content: space-between; flex-wrap:wrap; gap:10px;
 }
-input.edit-field.edit-title{
-  font-family:'Fraunces', serif; font-weight:600; font-size: 16px; color: var(--wine-deep);
-}
-textarea.edit-field{ min-height: 64px; resize: vertical; font-size: 14px; line-height:1.55; }
-textarea.edit-field.edit-caption{ min-height: 140px; }
-.slide-edit{
-  display:flex; flex-direction:column; gap:6px;
-  background: var(--paper); border: 1px dashed var(--gold); border-radius:4px; padding:10px;
-}
-.slide-edit input.edit-field{ font-family:'Fraunces', serif; font-weight:600; font-size:13.5px; color:var(--wine); margin-top:0; }
-.slide-edit textarea.edit-field{ min-height: 56px; font-size: 14px; }
+footer a{ color: var(--ink-soft); text-decoration:none; }
+footer a:hover{ color: var(--wine); }
 
-/* ---------- FOOTNOTE ---------- */
-.footnote{
-  padding: 26px 24px 0;
-  font-family:'Space Mono', monospace;
-  font-size: 11px;
-  color: var(--ink-soft);
-  line-height: 1.6;
-}
+/* ---------- SETUP / LOADING ---------- */
+.center-msg{ padding: 80px clamp(20px, 5vw, 64px); text-align:center; color: var(--ink-soft); font-size: 14px; }
+.center-msg strong{ color: var(--wine-deep); display:block; margin-bottom:8px; font-size:16px; font-family:'Fraunces', serif; }
+.center-msg code{ background: var(--stamp-light); padding: 2px 7px; border-radius: 5px; font-size: 13px; }
 
-@media (max-width: 480px){
-  .hero{ padding: 32px 18px 24px; }
-  .progress-wrap{ padding: 16px 18px; }
-  .controls{ padding: 12px 18px 10px; }
-  #postsList{ padding: 14px 12px 0; }
-  .post-header{ grid-template-columns: auto 1fr auto; gap: 8px; padding: 14px 10px 14px 10px; }
-  .stamp-btn{ width: 54px; height: 54px; font-size: 8px; }
-  .post-body{ padding-left: 10px; padding-right: 10px; }
-  .post-title{ font-size: 15px; }
+@media (max-width: 640px){
+  .stats{ grid-template-columns: repeat(2, 1fr); }
+  header{ flex-direction: column; align-items:flex-start; }
+  .updated{ text-align:left; }
+  .edit-row{ flex-direction: column; }
 }
 </style>
 </head>
 <body>
-<div class="page">
 
-  <header class="hero">
-    <p class="hero-eyebrow">Briefing de conteúdo</p>
-    <h1><span class="handle">@advamandareis</span><br>Amanda Reis | Advogada</h1>
-    <p class="hero-sub">Agosto → Outubro 2026 — 3 meses, 2 posts por semana. Marque o selo em cada post assim que ele for publicado.</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><b>26</b><span>Posts</span></div>
-      <div class="hero-stat"><b>2×</b><span>Por semana</span></div>
-      <div class="hero-stat"><b>17</b><span>Carrosséis</span></div>
-      <div class="hero-stat"><b>9</b><span>Posts únicos</span></div>
-    </div>
-  </header>
-
-  <div class="tools-bar">
-    <span id="syncBadge" class="sync-badge">…</span>
-    <button id="editModeBtn" class="ghost-btn">✏️ Modo edição</button>
+<header>
+  <div class="brand-text">
+    <div class="eyebrow">Painel interno · briefing de conteúdo</div>
+    <h1><span class="handle">@advamandareis</span> — Amanda Reis | Advogada</h1>
   </div>
+  <div class="header-right">
+    <div class="updated">Atualizado em <strong id="dataAtualizacao">—</strong></div>
+    <button class="edit-toggle" id="editToggle">🔓 Editar</button>
+  </div>
+</header>
 
-  <section class="approval-card">
-    <div class="approval-head">
-      <span class="approval-label">Status geral do briefing</span>
-      <span class="approval-current state-pending" id="approvalCurrent">Ainda não avaliado</span>
+<div id="setupMessage" style="display:none" class="center-msg"></div>
+
+<div id="appContent" style="display:none">
+
+  <section class="hero">
+    <div class="section-title">📢 Posts do Feed</div>
+    <h2>Conteúdo do <em>Feed</em><br>em produção.</h2>
+    <p>Acompanhe aqui a evolução de cada post do briefing — carrosséis e posts únicos de agosto a outubro. Assim que uma arte fica pronta, o card muda de status e o link de acesso aparece. Abra o briefing completo de cada post pra ler o conteúdo, e use os botões para aprovar ou pedir ajuste.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="num" id="postsStatTotal">0</div><div class="label">Posts no briefing</div></div>
+      <div class="stat pronto"><div class="num" id="postsStatPronto">0</div><div class="label">Prontos</div></div>
+      <div class="stat producao"><div class="num" id="postsStatProducao">0</div><div class="label">Em produção</div></div>
+      <div class="stat"><div class="num" id="postsStatPendente">0</div><div class="label">Pendentes</div></div>
     </div>
-    <div class="approval-buttons">
-      <button class="approval-btn approve" data-approval="approved">✅ Aprovar briefing</button>
-      <button class="approval-btn reject" data-approval="rejected">↺ Solicitar alterações</button>
+
+    <div class="approval-summary">
+      <span class="ok">✅ <b id="postsAprovados">0</b> aprovados</span>
+      <span>⏳ <b id="postsAguardando">0</b> aguardando avaliação</span>
+      <span class="warn">↺ <b id="postsAlteracao">0</b> com pedido de alteração</span>
     </div>
-    <p class="approval-hint">Quer mudar algo pontual? Abra o post e escreva no campo "Sugestão de alteração". Depois é só copiar o resumo (<span id="commentCount">0</span> posts com pedido de ajuste no momento) e enviar para quem preparou o briefing.</p>
-    <div class="approval-actions">
-      <button id="copySummaryBtn" class="ghost-btn">📋 Copiar resumo da revisão</button>
-      <a id="mailSummaryBtn" class="ghost-btn" href="#">✉️ Enviar por e-mail</a>
+
+    <div class="track-wrap">
+      <div class="track-top">
+        <div class="pct"><span id="postsStatPct">0%</span> concluído</div>
+        <div class="track-label">Meta: todas as artes prontas</div>
+      </div>
+      <div class="track">
+        <div class="track-fill" id="postsTrackFill" style="width:0%"></div>
+        <div class="track-marker" id="postsTrackMarker" style="left:0%">✒️</div>
+      </div>
     </div>
   </section>
 
-  <div class="progress-wrap">
-    <div class="progress-top">
-      <span class="label">Progresso do trimestre</span>
-      <span class="value"><span id="statDone">0</span>/<span id="statTotal">26</span> publicados — <span id="progressPct">0%</span></span>
-    </div>
-    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="legend">
+    <div class="legend-item"><span class="dot pendente"></span> Pendente</div>
+    <div class="legend-item"><span class="dot producao"></span> Em produção</div>
+    <div class="legend-item"><span class="dot pronto"></span> Pronto (com link)</div>
   </div>
 
-  <div class="controls">
-    <div class="tabs">
-      <button class="tab active" data-tab="todos">Todos <span class="tab-count"></span></button>
-      <button class="tab" data-tab="ago">Agosto <span class="tab-count"></span></button>
-      <button class="tab" data-tab="set">Setembro <span class="tab-count"></span></button>
-      <button class="tab" data-tab="out">Outubro <span class="tab-count"></span></button>
-    </div>
-    <div class="chips">
-      <button class="chip active" data-status="todos">Todos</button>
-      <button class="chip" data-status="pendentes">Pendentes</button>
-      <button class="chip" data-status="publicados">Publicados</button>
-    </div>
+  <div class="filters" id="filtersPosts">
+    <button class="filter-btn active" data-filter="todos">Todos</button>
+    <button class="filter-btn" data-filter="pronto">Prontos</button>
+    <button class="filter-btn" data-filter="producao">Em produção</button>
+    <button class="filter-btn" data-filter="pendente">Pendentes</button>
   </div>
 
-  <main id="postsList"></main>
+  <div class="grid" id="gridPosts"></div>
 
-  <p class="footnote">
-    Publicações às terças e sextas, 18h–20h. Capa dos carrosséis deve funcionar como imagem standalone no feed.
-    Responder comentários nas primeiras 2h após publicar. Stories complementares recomendados: enquete, caixa de perguntas, repost com sticker de swipe.
-    Seu progresso fica salvo automaticamente neste dispositivo/conta — pode fechar e voltar quando quiser.
-  </p>
+  <section class="hero reels-hero">
+    <div class="section-title">🎥 Reels</div>
+    <h2>Reels para <em>gravar</em><br>este trimestre.</h2>
+    <p>Roteiros prontos pra você gravar — cada card tem um resumo aqui no painel e um botão pra abrir o briefing completo (roteiro cena a cena) no Google Docs.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="num" id="reelsStatTotal">0</div><div class="label">Reels no briefing</div></div>
+      <div class="stat pronto"><div class="num" id="reelsStatPronto">0</div><div class="label">Gravados</div></div>
+      <div class="stat producao"><div class="num" id="reelsStatProducao">0</div><div class="label">Em gravação</div></div>
+      <div class="stat"><div class="num" id="reelsStatPendente">0</div><div class="label">Pendentes</div></div>
+    </div>
+
+    <div class="track-wrap">
+      <div class="track-top">
+        <div class="pct"><span id="reelsStatPct">0%</span> concluído</div>
+        <div class="track-label">Meta: todos os reels gravados</div>
+      </div>
+      <div class="track">
+        <div class="track-fill" id="reelsTrackFill" style="width:0%"></div>
+        <div class="track-marker" id="reelsTrackMarker" style="left:0%">🎬</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="legend">
+    <div class="legend-item"><span class="dot pendente"></span> Pendente</div>
+    <div class="legend-item"><span class="dot producao"></span> Em gravação</div>
+    <div class="legend-item"><span class="dot pronto"></span> Gravado / publicado</div>
+  </div>
+
+  <div class="filters" id="filtersReels">
+    <button class="filter-btn active" data-filter="todos">Todos</button>
+    <button class="filter-btn" data-filter="pronto">Gravados</button>
+    <button class="filter-btn" data-filter="producao">Em gravação</button>
+    <button class="filter-btn" data-filter="pendente">Pendentes</button>
+  </div>
+
+  <div class="grid" id="gridReels"></div>
+
+  <footer>
+    <span>Amanda Reis Advocacia — Briefing de conteúdo · Agosto a Outubro de 2026</span>
+    <a href="https://www.instagram.com/advamandareis/" target="_blank" rel="noopener">@advamandareis</a>
+  </footer>
 
 </div>
 
 <script type="module">
-// ==== DATA ====
-const POSTS = [
-  {
-    id:'p01', num:3, date:'11/08/2026', weekday:'Terça-feira', month:'ago',
-    format:'unico', area:'Institucional', tag:'⚠️ Dia do Advogado — post temático obrigatório',
-    title:'Dia do Advogado: por que essa profissão existe para proteger você',
-    art:'Foto profissional da Amanda, fundo escuro elegante. Texto: "11 de agosto — Dia do Advogado". Subtexto: "Minha toga não é sobre mim. É sobre quem precisa ser defendido."',
-    caption:'Hoje é o meu dia — mas eu prefiro dividir ele com quem eu defendo. 🤍⚖️\n\nEscolhi o Direito porque acredito numa coisa simples: ninguém devia enfrentar sozinho o INSS, um ex-empregador, uma partilha injusta ou uma situação de violência. O advogado existe para equilibrar essa balança. Para transformar medo em informação. Para transformar "não sei o que fazer" em um plano.\n\nObrigada a cada cliente que confiou o próprio caso nas minhas mãos nesses anos. É por vocês que eu continuo.\n\n📩 link na bio',
-    hashtags:['#diadoadvogado','#advogada','#Brasília','#amandareisadv','#advocacia','#11deagosto','#justiça']
-  },
-  {
-    id:'p02', num:4, date:'14/08/2026', weekday:'Sexta-feira', month:'ago',
-    format:'carrossel', area:'Direito Previdenciário', tag:null,
-    title:'Auxílio-reclusão: o benefício que quase ninguém conhece',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Auxílio-reclusão: o benefício que o INSS não anuncia" — Subtítulo: "Para famílias de quem está preso"'},
-      {t:'Slide 2 — O que é?', b:'Benefício pago à família de segurado do INSS que é preso em regime fechado ou semiaberto, enquanto durar a prisão.'},
-      {t:'Slide 3 — Quem tem direito?', b:'Cônjuge ou companheiro(a) / Filhos menores de 21 anos ou inválidos / Pais, se comprovada dependência econômica.'},
-      {t:'Slide 4 — Quais as condições', b:'O preso precisa ter qualidade de segurado no momento da prisão / A renda dele antes da prisão precisa estar dentro do teto definido pelo INSS (baixa renda).'},
-      {t:'Slide 5 — Erros que fazem o pedido ser negado', b:'Não comprovar o regime de prisão / Não atualizar a situação prisional periodicamente / Renda do preso acima do limite na data da prisão.'},
-      {t:'Slide 6 — Quando o benefício acaba', b:'Quando o preso é solto, foge, ou passa para regime aberto. A família precisa avisar o INSS a cada mudança de regime.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Família não devia pagar duas vezes pela prisão de alguém." CTA: "Me chama e vamos ver se você tem direito. link na bio"'}
-    ],
-    caption:'Você sabia que a família de uma pessoa presa pode ter direito a um benefício do INSS? 🔒 O auxílio-reclusão existe exatamente para isso — e é um dos benefícios menos conhecidos (e mais mal explicados) da Previdência. No carrossel de hoje, explico quem tem direito e os erros que mais derrubam o pedido.\n\n👉 Arrasta e manda pra quem pode precisar.\n📩 link na bio | @advamandareis',
-    hashtags:['#auxílioreclusão','#INSS','#benefício','#direitoprevidenciário','#advogada','#Brasília','#amandareisadv','#família']
-  },
-  {
-    id:'p03', num:5, date:'18/08/2026', weekday:'Terça-feira', month:'ago',
-    format:'carrossel', area:'Direito Eleitoral', tag:'🗳️ Início do período de propaganda eleitoral',
-    title:'Propaganda eleitoral nas redes: o que pode e o que dá processo',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Propaganda eleitoral nas redes: o que pode e o que dá processo" — Subtítulo: "A campanha começou — saiba os limites"'},
-      {t:'Slide 2 — O que já está liberado', b:'Desde meados de agosto, com o início oficial da propaganda eleitoral, compartilhar conteúdo de candidato, fazer post defendendo posição política e usar bottons/camisetas já são permitidos livremente.'},
-      {t:'Slide 3 — O que qualquer pessoa pode fazer', b:'Compartilhar posts de candidatos que apoia / Fazer live com o candidato, sem autorização / Declarar voto abertamente nas redes / Usar bottons, adesivos e camisetas.'},
-      {t:'Slide 4 — O que é proibido', b:'Impulsionar posts com dinheiro fora das regras do TSE / Criar perfil falso ou conteúdo enganoso / Empresa fazer propaganda paga em nome de candidato / Usar página de órgão público para campanha.'},
-      {t:'Slide 5 — Compartilhei algo duvidoso sem saber?', b:'Ignorância não isenta totalmente, mas o risco maior é de quem cria e de quem compartilha sabendo que é falso. Ainda assim, o ideal é sempre checar a fonte antes.'},
-      {t:'Slide 6 — Quando procurar um advogado eleitoral', b:'Se você é candidato ou assessor / Se foi alvo de conteúdo enganoso / Se sofreu pressão para votar em alguém / Se quer denunciar irregularidade.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Campanha nas redes também tem regra — e quem descumpre paga caro." CTA: "Atendimento especializado em Direito Eleitoral: link na bio"'}
-    ],
-    caption:'A campanha esquentou — e as redes sociais estão no centro dela. 🗳️📱 No carrossel de hoje explico o que qualquer pessoa pode fazer nas redes durante a eleição, e o que já é considerado irregular.\n\n👉 Arrasta antes de compartilhar qualquer coisa duvidosa.\n💬 Ficou com alguma dúvida sobre o que pode ou não? Me conta aqui.\n📩 link na bio | @advamandareis',
-    hashtags:['#direitoeleitoral','#eleições2026','#propagandaeleitoral','#fakenews','#advogada','#Brasília','#amandareisadv','#política']
-  },
-  {
-    id:'p04', num:6, date:'21/08/2026', weekday:'Sexta-feira', month:'ago',
-    format:'carrossel', area:'Direito da Família', tag:null,
-    title:'Violência doméstica: como funciona a medida protetiva na prática',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Medida protetiva: como pedir e o que ela garante" — Subtítulo: "Passo a passo para quem precisa de proteção"'},
-      {t:'Slide 2 — O que é a medida protetiva?', b:'Decisão judicial que obriga o agressor a manter distância da vítima, podendo incluir afastamento do lar, proibição de contato e apreensão de arma.'},
-      {t:'Slide 3 — Como pedir?', b:'Na delegacia (qualquer uma, não precisa ser especializada) ou direto no fórum, com ou sem advogado. O pedido é gratuito.'},
-      {t:'Slide 4 — Em quanto tempo sai?', b:'A lei prevê decisão em até 48 horas após o pedido — sem precisar ouvir o agressor antes.'},
-      {t:'Slide 5 — O que a medida pode incluir', b:'Afastamento do agressor do lar / Proibição de aproximação e contato / Suspensão de porte de arma / Prestação de alimentos provisórios.'},
-      {t:'Slide 6 — E se o agressor descumprir?', b:'Descumprir medida protetiva é crime, com pena de prisão — e pode ser preso em flagrante.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda, tom acolhedor. Texto: "Pedir ajuda não é exagero. É proteção." CTA: "Atendimento sigiloso: link na bio"'}
-    ],
-    caption:'Se você está com medo de alguém que deveria te amar, saiba: existe caminho legal, e ele é mais rápido do que parece. 🛡️ No carrossel de hoje, explico como pedir uma medida protetiva, o que ela garante e o que acontece se o agressor descumprir.\n\n👉 Salva e manda pra quem possa precisar.\n💬 Estou aqui, sem julgamento.\n📩 Atendimento sigiloso: link na bio | @advamandareis',
-    hashtags:['#medidaprotetiva','#violênciadoméstica','#leimariadapenha','#direitofamília','#advogada','#Brasília','#amandareisadv','#mulheres']
-  },
-  {
-    id:'p05', num:7, date:'25/08/2026', weekday:'Terça-feira', month:'ago',
-    format:'unico', area:'Direito Trabalhista', tag:'📚 Mito ou Verdade — Série Trabalhista 2',
-    title:'Mito ou Verdade: "Home office tira o direito a hora extra"',
-    art:'Arte em formato de quiz. Fundo escuro, texto destaque em vinho. Pergunta: "MITO OU VERDADE? \'Trabalhar em home office tira o direito a hora extra.\'" Resposta: "🚫 MITO — quem trabalha em home office com controle de jornada (ponto, horário fixo) tem direito a hora extra igual quem trabalha presencial."',
-    caption:'📢 MITO OU VERDADE? "Trabalhar em home office tira o direito a hora extra."\n\n🚫 MITO — e um dos erros mais repetidos pelas empresas.\n\nSe a sua empresa controla seu horário — ponto eletrônico, exigência de estar online em determinado período, cobrança de horário de entrada e saída — você tem direito a hora extra, mesmo trabalhando de casa. O que muda é só a forma de comprovar: prints, mensagens e e-mails viram prova.\n\n💬 Você trabalha em home office? Conta como funciona o controle de horário aí.\n📩 link na bio',
-    hashtags:['#homeoffice','#horaextra','#direitotrabalhista','#CLT','#trabalhoremoto','#advogada','#amandareisadv','#Brasília']
-  },
-  {
-    id:'p06', num:8, date:'28/08/2026', weekday:'Sexta-feira', month:'ago',
-    format:'carrossel', area:'Direito das Sucessões', tag:null,
-    title:'Doação em vida x herança: o que compensa mais',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Doação em vida ou herança? Entenda antes de decidir" — Subtítulo: "Planejamento sucessório sem dor de cabeça"'},
-      {t:'Slide 2 — O que é doação em vida?', b:'Transferência de bens feita pelo titular ainda vivo, para herdeiros ou terceiros, com regras específicas de imposto e limite.'},
-      {t:'Slide 3 — Vantagens da doação em vida', b:'Evita disputa entre herdeiros depois / Permite planejar a divisão com calma / Pode reduzir custos comparado a um inventário longo.'},
-      {t:'Slide 4 — Cuidados importantes', b:'A doação para herdeiro conta como adiantamento da herança (precisa ser levada em conta na partilha futura) / Precisa respeitar a legítima (50% dos bens reservada aos herdeiros necessários).'},
-      {t:'Slide 5 — E o imposto?', b:'Incide o ITCMD tanto na doação quanto na herança — a alíquota é a mesma no DF, então o imposto sozinho não é motivo para escolher um ou outro.'},
-      {t:'Slide 6 — Quando vale mais a pena esperar o inventário', b:'Quando o patrimônio ainda gera renda que o titular precisa / Quando há risco de a doação gerar conflito familiar antecipado.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Não existe resposta única — existe a resposta certa para a sua família." CTA: "Vamos planejar juntos. link na bio"'}
-    ],
-    caption:'Doar em vida ou deixar para o inventário? Essa é uma das perguntas que mais recebo em planejamento sucessório. 📋 No carrossel de hoje comparo as duas opções — vantagens, cuidados e quando cada uma faz mais sentido.\n\n👉 Arrasta e comece a planejar o patrimônio da sua família com calma.\n📩 link na bio | @advamandareis',
-    hashtags:['#doaçãoemvida','#herança','#sucessões','#planejamentosucessório','#advogada','#Brasília','#amandareisadv','#patrimônio']
-  },
-  {
-    id:'p07', num:9, date:'01/09/2026', weekday:'Terça-feira', month:'set',
-    format:'carrossel', area:'Direito Trabalhista', tag:null,
-    title:'Trabalho intermitente: seus direitos nesse tipo de contrato',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Trabalho intermitente: seus direitos nesse tipo de contrato" — Subtítulo: "Para quem trabalha só quando é chamado"'},
-      {t:'Slide 2 — O que é o contrato intermitente?', b:'Modalidade em que a empresa convoca o trabalhador com pelo menos 3 dias de antecedência, e o pagamento é feito só pelas horas efetivamente trabalhadas.'},
-      {t:'Slide 3 — Dá pra recusar a convocação?', b:'Sim. Recusar uma convocação não é falta grave nem motivo para demissão — o trabalhador tem até 1 dia útil para responder se aceita ou não.'},
-      {t:'Slide 4 — Direitos que você mantém', b:'Férias proporcionais / 13º proporcional / FGTS / Recolhimento ao INSS / Descanso semanal remunerado — tudo calculado por período efetivamente trabalhado.'},
-      {t:'Slide 5 — Onde mora o perigo', b:'Quando a empresa chama o trabalhador toda semana, no mesmo horário, como se fosse uma rotina fixa — mas sem dar os direitos de um contrato CLT comum.'},
-      {t:'Slide 6 — Isso pode virar vínculo empregatício comum?', b:'Sim. Se a convocação vira uma rotina disfarçada de intermitente, é possível pedir na Justiça o reconhecimento de vínculo CLT integral, com todos os direitos retroativos.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Intermitente de verdade tem regra. Intermitente disfarçado tem solução." CTA: "Me manda sua rotina de convocações. link na bio"'}
-    ],
-    caption:'Trabalho intermitente é contrato de verdade — com direitos de verdade. 📲 Mas muita empresa usa esse modelo errado, chamando o funcionário toda semana como se fosse CLT comum, só pra pagar menos. No carrossel de hoje explico a diferença.\n\n👉 Arrasta e entenda se a sua rotina de trabalho está dentro da lei.\n📩 link na bio | @advamandareis',
-    hashtags:['#trabalhointermitente','#direitotrabalhista','#CLT','#contrato','#advogada','#Brasília','#amandareisadv','#trabalhador']
-  },
-  {
-    id:'p8', num:10, date:'04/09/2026', weekday:'Sexta-feira', month:'set',
-    format:'carrossel', area:'Direito Previdenciário', tag:null,
-    title:'Aposentadoria por idade x tempo de contribuição: qual escolher',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Aposentadoria por idade x tempo de contribuição" — Subtítulo: "Entenda as regras atuais antes de pedir"'},
-      {t:'Slide 2 — Aposentadoria por idade (regra atual)', b:'Mulher: 62 anos / Homem: 65 anos, com no mínimo 15 anos de contribuição (mulher) ou 20 anos (homem), dentro das regras pós-reforma.'},
-      {t:'Slide 3 — Tempo de contribuição, hoje', b:'Não existe mais isolada — virou aposentadoria por pontos ou por tempo mínimo com idade progressiva, conforme a regra de transição de quem já contribuía antes de 2019.'},
-      {t:'Slide 4 — Regra de pontos', b:'Soma da idade + tempo de contribuição precisa atingir um número mínimo, que sobe a cada ano (ex.: 100/92 pontos, aumentando gradualmente).'},
-      {t:'Slide 5 — Qual rende mais?', b:'Depende do histórico de contribuição de cada pessoa. Às vezes esperar 1-2 anos muda bastante o valor final do benefício — por isso o cálculo prévio é essencial.'},
-      {t:'Slide 6 — Erro comum', b:'Pedir aposentadoria pela primeira regra que aparece no Meu INSS, sem simular as outras — e perder valor no benefício para sempre.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Antes de pedir, simula. Depois de pedir, não tem volta." CTA: "Me manda seu extrato — vamos simular juntos. link na bio"'}
-    ],
-    caption:'Existe mais de um caminho para se aposentar — e nem sempre o primeiro que aparece no Meu INSS é o melhor pra você. 🧮 No carrossel de hoje comparo as regras de idade e de tempo de contribuição hoje em vigor.\n\n👉 Arrasta antes de dar entrada no seu pedido.\n📩 link na bio | @advamandareis',
-    hashtags:['#aposentadoria','#INSS','#direitoprevidenciário','#reformadaprevidência','#advogada','#Brasília','#amandareisadv']
-  },
-  {
-    id:'p9', num:11, date:'08/09/2026', weekday:'Terça-feira', month:'set',
-    format:'carrossel', area:'Direito Eleitoral', tag:null,
-    title:'Fake news na eleição: como denunciar e o que é crime eleitoral',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Fake news na eleição: como denunciar" — Subtítulo: "O que a lei considera crime eleitoral"'},
-      {t:'Slide 2 — O que caracteriza fake news eleitoral?', b:'Divulgar fato que você sabe ser inverídico, capaz de causar dano à honra de candidato ou de afetar o resultado da eleição.'},
-      {t:'Slide 3 — Isso é crime?', b:'Sim. A divulgação de fake news com essa intenção é crime eleitoral, com pena de detenção e multa, previsto na legislação eleitoral.'},
-      {t:'Slide 4 — E quem só compartilha, sem ter criado?', b:'Também pode responder, principalmente se sabia (ou deveria saber, por ser algo obviamente falso) que o conteúdo era mentiroso.'},
-      {t:'Slide 5 — Como denunciar', b:'Pelo aplicativo Pardal do TSE / No site da Justiça Eleitoral / No Ministério Público Eleitoral — sempre com print, link e data como prova.'},
-      {t:'Slide 6 — Antes de compartilhar, confira', b:'Fonte da informação / Se outros veículos sérios também noticiaram / Data da publicação (fake news antiga reciclada é comum).'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Uma checada rápida evita um problema grande." CTA: "Foi vítima de fake news numa campanha? Me chama. link na bio"'}
-    ],
-    caption:'Fake news na eleição não é "só uma piada" — é crime. ⚠️ No carrossel de hoje explico o que caracteriza fake news eleitoral, como denunciar e por que compartilhar sem checar também pode te trazer problema.\n\n👉 Arrasta e confere antes de repassar qualquer coisa nessa reta final de campanha.\n📩 link na bio | @advamandareis',
-    hashtags:['#fakenews','#direitoeleitoral','#eleições2026','#TSE','#advogada','#Brasília','#amandareisadv','#política']
-  },
-  {
-    id:'p10', num:12, date:'11/09/2026', weekday:'Sexta-feira', month:'set',
-    format:'carrossel', area:'Direito da Família', tag:null,
-    title:'Paternidade socioafetiva: quando o "pai de coração" vira pai legal',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Paternidade socioafetiva: quando o amor vira direito" — Subtítulo: "Entenda como reconhecer oficialmente"'},
-      {t:'Slide 2 — O que é paternidade socioafetiva?', b:'É o reconhecimento legal de quem exerce o papel de pai (ou mãe) no dia a dia, mesmo sem laço biológico — como padrastos, madrastas ou pais de criação.'},
-      {t:'Slide 3 — O que é preciso para reconhecer?', b:'Comprovar a convivência afetiva contínua, cuidado, presença na criação e tratamento público como filho(a) — testemunhas, fotos, escola, plano de saúde ajudam.'},
-      {t:'Slide 4 — Onde fazer o reconhecimento?', b:'Pode ser feito direto no cartório de registro civil, sem precisar de processo judicial, quando há consenso entre as partes.'},
-      {t:'Slide 5 — Isso dá direito a herança?', b:'Sim. Uma vez reconhecida, a paternidade socioafetiva gera os mesmos direitos da paternidade biológica: herança, pensão, sobrenome.'},
-      {t:'Slide 6 — E se não houver consenso?', b:'Aí o reconhecimento precisa ser feito na Justiça, com prova da relação afetiva construída ao longo do tempo.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Família se define pelo cuidado — e a lei já reconhece isso." CTA: "Me chama para orientar o reconhecimento. link na bio"'}
-    ],
-    caption:'Tem pai que não é do sangue — e nem por isso é menos pai. 💙 A paternidade socioafetiva já é reconhecida no Brasil, e garante os mesmos direitos de uma paternidade biológica. No carrossel de hoje explico como funciona o reconhecimento.\n\n👉 Arrasta e entenda seus direitos (ou os do seu filho de coração).\n📩 link na bio | @advamandareis',
-    hashtags:['#paternidadesocioafetiva','#direitofamília','#filiação','#reconhecimento','#advogada','#Brasília','#amandareisadv','#família']
-  },
-  {
-    id:'p11', num:13, date:'15/09/2026', weekday:'Terça-feira', month:'set',
-    format:'unico', area:'Institucional', tag:'🛍️ Dia do Cliente',
-    title:'Dia do Cliente: obrigada por confiarem sua história a mim',
-    art:'Foto da Amanda em tom acolhedor. Texto: "Dia do Cliente". Subtexto: "Cada caso que eu assino leva um pedaço da confiança de vocês."',
-    caption:'Hoje é o Dia do Cliente — e eu quero aproveitar para agradecer. 🙏\n\nCada processo que chega até mim carrega uma história: uma aposentadoria que parecia impossível, uma pensão que ninguém explicava direito, uma família tentando se reorganizar depois de uma separação. Vocês confiam pedaços importantes da vida de vocês a mim — e eu não trato isso como rotina.\n\nObrigada por cada indicação, cada retorno, cada "deu certo, doutora".\n\n📩 Se você ainda não é cliente e precisa de ajuda, me chama. link na bio',
-    hashtags:['#diadocliente','#advogada','#Brasília','#amandareisadv','#gratidão','#advocacia','#confiança']
-  },
-  {
-    id:'p12', num:14, date:'18/09/2026', weekday:'Sexta-feira', month:'set',
-    format:'carrossel', area:'Direito Trabalhista', tag:null,
-    title:'Assédio sexual no trabalho: diferença para o assédio moral',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Assédio sexual no trabalho" — Subtítulo: "Entenda a diferença para o assédio moral — e como agir"'},
-      {t:'Slide 2 — Assédio moral x assédio sexual', b:'Assédio moral humilha e desgasta emocionalmente, de forma repetida. Assédio sexual busca vantagem ou favor de natureza sexual, geralmente usando uma posição de poder.'},
-      {t:'Slide 3 — O que conta como assédio sexual', b:'Comentários com conotação sexual insistentes / Convites depois de recusa repetida / Toques sem consentimento / Ameaça velada de prejudicar quem não aceitar.'},
-      {t:'Slide 4 — Precisa ter contato físico para configurar?', b:'Não. Assédio sexual pode ser verbal, por mensagem, ou por insinuação repetida — o contato físico agrava, mas não é requisito.'},
-      {t:'Slide 5 — O que fazer', b:'Documentar tudo: mensagens, datas, testemunhas / Denunciar por escrito ao RH ou à ouvidoria / Buscar apoio jurídico antes de qualquer decisão sobre continuar ou não no emprego.'},
-      {t:'Slide 6 — Consequências jurídicas', b:'Além de ser crime, pode gerar rescisão indireta (o trabalhador sai e recebe como se tivesse sido demitido) e indenização por dano moral.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Assédio sexual não é \'cantada\'. É crime." CTA: "Atendimento sigiloso: link na bio"'}
-    ],
-    caption:'Assédio sexual no trabalho não é "cantada" — é crime, e tem nome jurídico. 🚫 No carrossel de hoje explico a diferença entre assédio moral e sexual, e o que fazer se você está vivendo isso.\n\n👉 Arrasta e manda para quem precisa saber.\n📩 Atendimento sigiloso: link na bio | @advamandareis',
-    hashtags:['#assediosexual','#assediomoral','#direitotrabalhista','#CLT','#trabalho','#advogada','#Brasília','#amandareisadv']
-  },
-  {
-    id:'p13', num:15, date:'22/09/2026', weekday:'Terça-feira', month:'set',
-    format:'unico', area:'Direito Previdenciário', tag:'📚 Mito ou Verdade — Série Previdenciária 3',
-    title:'Mito ou Verdade: "Quem tem doença grave só consegue aposentadoria por invalidez"',
-    art:'Arte em formato de quiz. Fundo escuro, destaque em vinho. Pergunta: "MITO OU VERDADE? \'Quem tem doença grave só consegue aposentadoria por invalidez.\'" Resposta: "🚫 MITO — dependendo da doença e da idade, pode ser mais vantajoso pedir aposentadoria por idade ou por tempo de contribuição, se já tiver os requisitos."',
-    caption:'📢 MITO OU VERDADE? "Quem tem doença grave só consegue aposentadoria por invalidez."\n\n🚫 MITO. A aposentadoria por invalidez é só um dos caminhos — e nem sempre o mais vantajoso. Se a pessoa já tem idade ou tempo de contribuição suficiente, pode valer mais a pena pedir aposentadoria por idade ou por tempo de contribuição, que costuma ter valor maior e regras de acúmulo diferentes.\n\nO ideal é sempre simular todas as opções antes de decidir qual pedir.\n\n💬 Você já passou por essa dúvida? Me conta aqui.\n📩 link na bio',
-    hashtags:['#aposentadoria','#invalidez','#INSS','#direitoprevidenciário','#advogada','#amandareisadv','#Brasília']
-  },
-  {
-    id:'p14', num:16, date:'25/09/2026', weekday:'Sexta-feira', month:'set',
-    format:'carrossel', area:'Direito das Sucessões', tag:null,
-    title:'Herança digital: o que acontece com suas contas quando você morre',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Herança digital: redes sociais, e-mails e criptomoedas" — Subtítulo: "O que a lei já prevê — e o que ainda é zona cinzenta"'},
-      {t:'Slide 2 — O que é herança digital?', b:'Conjunto de bens e contas digitais deixados por alguém que falece: redes sociais, e-mails, contas em nuvem, criptomoedas, milhas aéreas, contas de jogos.'},
-      {t:'Slide 3 — Redes sociais têm direito próprio?', b:'Cada plataforma tem sua política — Instagram e Facebook permitem "perfil memorial" ou remoção mediante pedido da família com documento de óbito.'},
-      {t:'Slide 4 — E as criptomoedas?', b:'Entram no inventário como qualquer outro bem — mas só se a família souber que existem e tiver acesso às chaves/senhas. Sem isso, o valor pode se perder para sempre.'},
-      {t:'Slide 5 — O que fazer em vida para proteger a família', b:'Deixar uma lista de contas e um gestor de senhas compartilhado com pessoa de confiança / Mencionar bens digitais relevantes no testamento.'},
-      {t:'Slide 6 — Vale a pena colocar no testamento?', b:'Sim, principalmente para bens de valor (cripto, contas monetizadas, domínios) — evita disputa e perda de acesso.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Seu patrimônio também é digital — e merece planejamento." CTA: "Vamos incluir isso no seu planejamento sucessório. link na bio"'}
-    ],
-    caption:'Você já parou pra pensar no que acontece com suas contas quando você morre? 💻 Herança digital ainda é pouco discutida — mas cripto, contas monetizadas e até perfis em redes sociais entram na conversa sobre sucessão. No carrossel de hoje explico o que já está previsto em lei e o que você pode fazer para proteger sua família.\n\n👉 Arrasta e repensa seu planejamento.\n📩 link na bio | @advamandareis',
-    hashtags:['#herançadigital','#sucessões','#testamento','#criptomoedas','#advogada','#Brasília','#amandareisadv','#planejamento']
-  },
-  {
-    id:'p15', num:17, date:'29/09/2026', weekday:'Terça-feira', month:'set',
-    format:'carrossel', area:'Direito da Família', tag:null,
-    title:'Pensão alimentícia atrasada: prisão, penhora e outras formas de cobrar',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Pensão atrasada: como cobrar de verdade" — Subtítulo: "Conheça as ferramentas que a lei te dá"'},
-      {t:'Slide 2 — Primeiro passo', b:'Ação de execução de alimentos na Vara de Família, apresentando o cálculo do valor devido e o título (acordo ou sentença).'},
-      {t:'Slide 3 — Rito da prisão civil', b:'Usado para as 3 últimas parcelas vencidas. Se o devedor não paga nem justifica, o juiz pode decretar prisão civil de 1 a 3 meses — e a dívida continua existindo depois.'},
-      {t:'Slide 4 — Rito da penhora', b:'Para dívidas mais antigas, usa-se o rito de penhora de bens e bloqueio de contas (Sisbajud), sem prisão, mas com bloqueio direto do dinheiro.'},
-      {t:'Slide 5 — Desconto direto em folha', b:'Se o devedor tem emprego formal, o juiz pode determinar desconto automático direto no salário — a forma mais eficaz de garantir o pagamento contínuo.'},
-      {t:'Slide 6 — E se o devedor for autônomo e "sumir"?', b:'Existe a possibilidade de inclusão do nome nos órgãos de proteção ao crédito e até suspensão da CNH e do passaporte em casos de inadimplência contumaz.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Pensão atrasada tem solução — e ela é mais rápida do que parece." CTA: "Me manda o valor devido — vamos calcular e cobrar. link na bio"'}
-    ],
-    caption:'Pensão atrasada não precisa virar sofrimento eterno — a lei dá ferramentas fortes para cobrar. ⚖️ No carrossel de hoje explico as diferenças entre prisão civil, penhora e desconto em folha — e quando usar cada uma.\n\n👉 Arrasta antes de desistir de cobrar o que é do seu filho.\n📩 link na bio | @advamandareis',
-    hashtags:['#pensãoalimentícia','#direitofamília','#execuçãodealimentos','#advogada','#Brasília','#amandareisadv','#família']
-  },
-  {
-    id:'p16', num:18, date:'02/10/2026', weekday:'Sexta-feira', month:'out',
-    format:'unico', area:'Direito Eleitoral', tag:'🗳️ Véspera do 1º turno (eleição em 04/10)',
-    title:'Título de eleitor com problema? Resolva antes de domingo',
-    art:'Arte com elementos eleitorais, fundo escuro. Texto: "Domingo tem eleição. Seu título está em ordem?" Subtexto: "O que fazer até a véspera da votação."',
-    caption:'Domingo é dia de eleição — e ainda dá tempo de resolver pendência simples no seu título. 🗳️\n\nSe você não sabe seu local de votação, é só consultar no app e-Título ou no site do TSE. Se você não puder votar por estar fora do seu domicílio eleitoral, é possível justificar a ausência pelo mesmo aplicativo, no próprio dia.\n\nNão votar e não justificar pode gerar multa e pendências para tirar passaporte, prestar concurso público ou renovar documentos.\n\n📩 Dúvida sobre direito eleitoral? me chama. link na bio',
-    hashtags:['#eleições2026','#tituloeleitor','#TSE','#votação','#advogada','#Brasília','#amandareisadv','#cidadania']
-  },
-  {
-    id:'p17', num:19, date:'06/10/2026', weekday:'Terça-feira', month:'out',
-    format:'carrossel', area:'Direito Eleitoral', tag:'🗳️ Pós 1º turno — regras do 2º turno',
-    title:'Foi para o segundo turno? O que muda nas regras da campanha',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Segundo turno: o que muda nas regras" — Subtítulo: "Só concorrem presidente e governador — entenda o resto"'},
-      {t:'Slide 2 — Quem disputa o segundo turno?', b:'Apenas cargos de Presidente da República e Governador (quando nenhum candidato atinge maioria absoluta no primeiro turno). Demais cargos já foram definidos.'},
-      {t:'Slide 3 — Novo prazo de propaganda', b:'A propaganda eleitoral gratuita no rádio e TV para o segundo turno recomeça poucos dias após o resultado do primeiro turno, com tempo dividido só entre os dois candidatos remanescentes.'},
-      {t:'Slide 4 — Doações e financiamento', b:'Os candidatos do segundo turno podem receber novas doações dentro do limite de campanha, mesmo já tendo gastado parte do teto no primeiro turno.'},
-      {t:'Slide 5 — Coligações e apoios', b:'Partidos que não foram para o segundo turno podem declarar apoio formal a um dos dois candidatos remanescentes, mesmo sem ter integrado a chapa original.'},
-      {t:'Slide 6 — E as redes sociais nesse período?', b:'As mesmas regras de proibição de fake news e impulsionamento irregular continuam valendo até o dia da votação do segundo turno.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "A eleição não termina no primeiro domingo de outubro." CTA: "Dúvidas sobre a reta final? Me chama. link na bio"'}
-    ],
-    caption:'O resultado do primeiro turno saiu — e para presidente e governador, a disputa pode continuar. 🗳️ No carrossel de hoje explico o que muda nas regras para quem vai ao segundo turno.\n\n👉 Arrasta e fica por dentro da reta final.\n📩 link na bio | @advamandareis',
-    hashtags:['#segundoturno','#eleições2026','#direitoeleitoral','#TSE','#advogada','#Brasília','#amandareisadv','#política']
-  },
-  {
-    id:'p18', num:20, date:'09/10/2026', weekday:'Sexta-feira', month:'out',
-    format:'carrossel', area:'Direito da Família', tag:'🎈 Véspera do Dia das Crianças (12/10)',
-    title:'Dia das Crianças: os direitos dos filhos que os pais esquecem',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Dia das Crianças: direitos que todo filho tem" — Subtítulo: "E que muito pai e mãe esquece de garantir"'},
-      {t:'Slide 2 — Direito à convivência com os dois pais', b:'Mesmo em casos de separação conturbada, a lei garante que a criança tenha convivência com ambos os genitores — salvo risco comprovado.'},
-      {t:'Slide 3 — Direito a ser ouvida', b:'Em processos de guarda e visitas, a criança (a partir de idade e maturidade suficientes) pode ser ouvida pelo juiz sobre sua vontade — o chamado direito de opinião.'},
-      {t:'Slide 4 — Direito a pensão compatível com a vida que tinha', b:'A pensão alimentícia deve, na medida do possível, manter o padrão de vida que a criança tinha antes da separação dos pais.'},
-      {t:'Slide 5 — Direito a não ser usada como "arma"', b:'Usar a criança para atacar o ex-parceiro, seja escondendo informações ou fazendo comentários negativos, pode configurar alienação parental.'},
-      {t:'Slide 6 — Direito à herança e ao sobrenome, mesmo fora do casamento', b:'Filhos nascidos fora do casamento têm exatamente os mesmos direitos sucessórios e de reconhecimento que filhos nascidos dentro dele.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda, tom acolhedor. Texto: "Direito de criança não é sobre os pais — é sobre ela." CTA: "Feliz Dia das Crianças 💛 | link na bio"'}
-    ],
-    caption:'Feliz Dia das Crianças a todas as famílias que acompanho. 💛 Separação de pais acontece — mas os direitos da criança não podem ser esquecidos no meio do processo. No carrossel de hoje, reunião dos direitos que toda criança tem e que às vezes se perdem na disputa dos adultos.\n\n👉 Arrasta e compartilha com quem está passando por separação com filhos.\n📩 link na bio | @advamandareis',
-    hashtags:['#diadascrianças','#direitofamília','#guarda','#pensãoalimentícia','#advogada','#Brasília','#amandareisadv','#filhos']
-  },
-  {
-    id:'p19', num:21, date:'13/10/2026', weekday:'Terça-feira', month:'out',
-    format:'carrossel', area:'Direito Trabalhista', tag:null,
-    title:'Home office: seus direitos no trabalho remoto',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Home office: seus direitos no trabalho remoto" — Subtítulo: "Trabalhar de casa não é sinônimo de \'sem direitos\'"'},
-      {t:'Slide 2 — A empresa precisa controlar sua jornada?', b:'Não é obrigatório — mas se ela controla (ponto, exigência de disponibilidade em horário fixo), os mesmos direitos da CLT valem: hora extra, intervalo, adicional noturno.'},
-      {t:'Slide 3 — Quem paga os custos do home office?', b:'A lei prevê que despesas com equipamento, internet e infraestrutura devem ser acordadas em contrato — podem ficar, total ou parcialmente, com a empresa.'},
-      {t:'Slide 4 — Direito à desconexão', b:'A empresa não pode exigir resposta fora do horário combinado. Cobrança fora de hora, de forma repetida, pode virar hora extra ou até dano moral.'},
-      {t:'Slide 5 — Contrato de home office nunca foi formalizado?', b:'Isso não retira seus direitos — só dificulta a prova. Guarde prints e mensagens que mostrem sua rotina real de trabalho.'},
-      {t:'Slide 6 — Híbrido também conta', b:'As mesmas regras valem para quem trabalha parte da semana em casa e parte no escritório — o contrato deve deixar claro os dias e o regime de cada um.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Home office tem regra — e ela existe para te proteger." CTA: "Sua empresa nunca formalizou isso? Me chama. link na bio"'}
-    ],
-    caption:'Home office não é sinônimo de "sem direitos". 💻 No carrossel de hoje explico o que a lei já garante para quem trabalha remoto — de hora extra a reembolso de despesas.\n\n👉 Arrasta e confere se sua empresa está cumprindo.\n📩 link na bio | @advamandareis',
-    hashtags:['#homeoffice','#trabalhoremoto','#direitotrabalhista','#CLT','#advogada','#Brasília','#amandareisadv','#trabalhador']
-  },
-  {
-    id:'p20', num:22, date:'16/10/2026', weekday:'Sexta-feira', month:'out',
-    format:'carrossel', area:'Direito Previdenciário', tag:null,
-    title:'Salário-maternidade para autônoma e MEI: como funciona',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Salário-maternidade para autônoma e MEI" — Subtítulo: "Você tem direito, mesmo sem carteira assinada"'},
-      {t:'Slide 2 — Quem tem direito?', b:'Autônomas, MEIs, contribuintes individuais e facultativas que estejam em dia com a contribuição ao INSS na data do parto ou adoção.'},
-      {t:'Slide 3 — Qual o valor?', b:'Para contribuinte individual e facultativa: 1/12 da soma dos últimos 12 salários de contribuição. Para MEI: 1 salário mínimo, fixo.'},
-      {t:'Slide 4 — Quanto tempo dura?', b:'120 dias, os mesmos da CLT — contados a partir do parto, ou da data da adoção/guarda, no caso de adoção.'},
-      {t:'Slide 5 — Precisa de quantos meses de contribuição?', b:'Em regra, 10 meses de carência — exceto em caso de parto prematuro, quando a carência é reduzida proporcionalmente.'},
-      {t:'Slide 6 — Erro que mais atrasa o pedido', b:'Atraso ou falta no pagamento da guia DAS (MEI) ou GPS (contribuinte individual) nos meses anteriores ao parto — isso pode gerar negativa.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Empreender não tira o seu direito à licença-maternidade." CTA: "Me manda seu extrato de contribuição. link na bio"'}
-    ],
-    caption:'Empreendedora também tem direito à licença-maternidade — só que poucas sabem como pedir certo. 👶 No carrossel de hoje explico o valor, o prazo e a carência para MEI e autônoma.\n\n👉 Arrasta e manda pra alguma empreendedora grávida que você conhece.\n📩 link na bio | @advamandareis',
-    hashtags:['#saláriomaternidade','#MEI','#autônoma','#INSS','#direitoprevidenciário','#advogada','#Brasília','#amandareisadv']
-  },
-  {
-    id:'p21', num:23, date:'20/10/2026', weekday:'Terça-feira', month:'out',
-    format:'unico', area:'Institucional', tag:null,
-    title:'Post de humanização — o que ninguém vê no dia a dia da advocacia',
-    art:'Foto da Amanda em momento mais pessoal (estudando, no carro entre audiências, etc.). Texto sobreposto: "Tem processo que eu levo comigo até fora do expediente." Assinatura discreta.',
-    caption:'Tem casos que eu não esqueço quando saio do escritório. 💼\n\nUma mãe que finalmente conseguiu a pensão do filho. Um trabalhador que recebeu tudo que tinha direito depois de anos de silêncio. Uma família que conseguiu fechar o inventário sem brigar.\n\nA advocacia não é só processo e prazo — é gente. E cada gente que passa por aqui carrega uma expectativa que eu levo a sério.\n\nObrigada por confiarem sua história a mim.\n\n📩 link na bio',
-    hashtags:['#advocacia','#humanização','#propósito','#amandareisadv','#Brasília','#advogada','#bastidores']
-  },
-  {
-    id:'p22', num:24, date:'23/10/2026', weekday:'Sexta-feira', month:'out',
-    format:'unico', area:'Direito Eleitoral', tag:'🗳️ Véspera do 2º turno (eleição em 25/10)',
-    title:'Segundo turno: dúvidas de última hora sobre voto e mesário',
-    art:'Arte com elementos eleitorais sutis, fundo escuro. Texto: "Domingo é o segundo turno." Subtexto: "Quem vota, quem foi convocado mesário e como justificar ausência — resumo rápido." Assinatura Amanda.',
-    caption:'Reta final do segundo turno — resumo rápido para não ter dúvida no domingo. 🗳️\n\nSó vota quem votou (ou justificou) no primeiro turno — no mesmo local de sempre. Foi convocado mesário? Isso garante folga no dia seguinte e preferência em concurso público de mesmo cargo, entre outros benefícios. Não vai poder votar? Dá pra justificar pelo app e-Título em até 60 dias depois da eleição, sem multa.\n\n📩 Alguma dúvida sobre o dia da votação? Me manda aqui. link na bio',
-    hashtags:['#segundoturno','#eleições2026','#votação','#TSE','#advogada','#Brasília','#amandareisadv','#cidadania']
-  },
-  {
-    id:'p23', num:25, date:'27/10/2026', weekday:'Terça-feira', month:'out',
-    format:'carrossel', area:'Direito Previdenciário', tag:'🏛️ Véspera do Dia do Servidor Público (28/10)',
-    title:'Aposentadoria do servidor público: como funciona o RPPS',
-    slides:[
-      {t:'Slide 1 (Capa)', b:'Arte: "Aposentadoria do servidor público: entenda o RPPS" — Subtítulo: "Regras diferentes do INSS — e por isso geram tanta dúvida"'},
-      {t:'Slide 2 — O que é RPPS?', b:'Regime Próprio de Previdência Social, aplicável a servidores públicos efetivos (federais, estaduais, distritais e municipais), com regras próprias, diferentes do INSS (RGPS).'},
-      {t:'Slide 3 — Quais as regras gerais hoje', b:'Idade mínima e tempo de contribuição definidos pela reforma de cada ente federativo, geralmente com pedágio para quem já estava no cargo antes da mudança de regra.'},
-      {t:'Slide 4 — Integralidade e paridade', b:'Servidores que ingressaram antes de determinadas datas podem ter direito a se aposentar com o valor integral do último salário e com os mesmos reajustes dos servidores ativos — regra que não existe mais para quem entra hoje.'},
-      {t:'Slide 5 — E quem entrou depois da reforma?', b:'Em geral, o cálculo passa a considerar a média das contribuições, semelhante ao modelo do INSS, sem integralidade automática.'},
-      {t:'Slide 6 — Erro comum', b:'Não considerar o tempo de contribuição em regime anterior (CLT ou outro ente público) na hora de somar o tempo total — o que pode antecipar (ou atrasar) a aposentadoria.'},
-      {t:'Slide 7 (CTA)', b:'Foto da Amanda. Texto: "Servidor público também precisa simular antes de pedir." CTA: "Me manda seu tempo de serviço — vamos simular. link na bio"'}
-    ],
-    caption:'Amanhã é o Dia do Servidor Público — e é para vocês esse carrossel de hoje. 🏛️ O RPPS tem regras bem diferentes do INSS, e a maior parte das dúvidas que recebo de servidores é sobre integralidade, paridade e tempo de contribuição misto.\n\n👉 Arrasta e entenda como funciona a sua aposentadoria.\n📩 link na bio | @advamandareis',
-    hashtags:['#servidorpúblico','#RPPS','#aposentadoria','#direitoprevidenciário','#advogada','#Brasília','#amandareisadv']
-  },
-  {
-    id:'p24', num:26, date:'30/10/2026', weekday:'Sexta-feira', month:'out',
-    format:'unico', area:'Institucional', tag:'📊 Encerramento do trimestre',
-    title:'Post institucional de encerramento do trimestre',
-    art:'Foto profissional da Amanda. Texto: "3 meses. Uma eleição. Centenas de dúvidas respondidas." Subtexto: "Obrigada por seguir esse perfil e confiar no meu trabalho. Seguimos." Especialidades listadas discretamente.',
-    caption:'Fechamos mais um trimestre intenso — com eleição no meio do caminho e muita gente precisando de orientação jurídica de verdade. ⚖️\n\nAqui nesse perfil eu me comprometo a continuar trazendo informação clara, sem juridiquês e sem intimidação — porque direito que ninguém entende não protege ninguém.\n\nObrigada por cada curtida, comentário, compartilhamento e mensagem no direct. Tem muito mais vindo por aí.\n\n📩 Me chama: link na bio\n📌 Especialidades: INSS · Família · Sucessões · Trabalhista · Eleitoral',
-    hashtags:['#advogada','#Brasília','#amandareisadv','#INSS','#família','#trabalhista','#obrigada','#direitopratodos']
-  }
-];
-
-const MONTH_LABELS = {ago:'Agosto', set:'Setembro', out:'Outubro'};
-const FORMAT_LABELS = {unico:'Post Único', carrossel:'Carrossel'};
-const STORAGE_KEY = 'amanda-briefing-ago-out-2026:status';
-
-let statusMap = {};
-
-function areaKey(area){
-  if(area.includes('Trabalhista')) return 'trabalhista';
-  if(area.includes('Previdenciário')) return 'previdenciario';
-  if(area.includes('Família')) return 'familia';
-  if(area.includes('Sucessões')) return 'sucessoes';
-  if(area.includes('Eleitoral')) return 'eleitoral';
-  return 'institucional';
-}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-import { getFirestore, doc, setDoc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-/* ============================================================================
-   CONFIGURAÇÃO DO FIREBASE
-   Troque os valores abaixo pelos do SEU projeto Firebase:
-   Console do Firebase → Configurações do projeto → Seus apps → app da Web → Config
-   ============================================================================ */
+// ==========================================================================
+// 🔧 FIREBASE — mesmo projeto do briefing-draamanda já usado antes.
+// Esse painel usa uma coleção/documento novo (painelConteudo/amandaAgoOut2026)
+// pra não misturar com os dados do painel antigo.
+// ==========================================================================
 const firebaseConfig = {
   apiKey: "AIzaSyAM0N93Z273yZLD0EPm3s2QBdJPcCSeXyw",
   authDomain: "briefing-draamanda.firebaseapp.com",
@@ -871,439 +393,1880 @@ const firebaseConfig = {
   appId: "1:716229835483:web:70b96d3ec2e2d1265baafe"
 };
 
-/* Senha simples pro modo edição — troque por uma sua.
-   Atenção: isso é só uma trava de conveniência (fica visível pra quem olhar o código-fonte),
-   não é segurança de verdade. Quem souber a senha edita o conteúdo. */
-const EDIT_PASSPHRASE = "amanda2026";
+const ADMIN_PASSWORD = "amanda2026";
+const FIRESTORE_COLLECTION = "painelConteudo";
+const FIRESTORE_DOC = "amandaAgoOut2026";
 
-const FIRESTORE_COLLECTION = "amandaBriefing";
-const FIRESTORE_DOC = "agoOut2026";
-const LOCAL_KEY = "amanda-briefing-ago-out-2026:state";
+// ==========================================================================
+// CONTEÚDO INICIAL — POSTS DO FEED
+// Só é usado pra semear/completar o Firestore. Se um "numero" já existir no
+// banco, ele NÃO é sobrescrito (status, link, aprovação e comentário
+// continuam intactos). Itens novos aqui são adicionados automaticamente.
+// ==========================================================================
+const postsIniciais = [
+  {
+    "numero": 3,
+    "titulo": "Dia do Advogado: por que essa profissão existe para proteger você",
+    "formato": "carrossel",
+    "area": "Institucional",
+    "tag": "⚠️ Dia do Advogado — post temático obrigatório",
+    "date": "11/08/2026",
+    "weekday": "Terça-feira",
+    "month": "ago",
+    "objetivo": "Post temático obrigatório de data comemorativa, reforçando o propósito da profissão.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 4,
+    "titulo": "Auxílio-reclusão: o benefício que quase ninguém conhece",
+    "formato": "carrossel",
+    "area": "Direito Previdenciário",
+    "tag": null,
+    "date": "14/08/2026",
+    "weekday": "Sexta-feira",
+    "month": "ago",
+    "objetivo": "Explicar um benefício pouco conhecido do INSS e atrair famílias de pessoas presas como público.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 5,
+    "titulo": "Propaganda eleitoral nas redes: o que pode e o que dá processo",
+    "formato": "carrossel",
+    "area": "Direito Eleitoral",
+    "tag": "🗳️ Início do período de propaganda eleitoral",
+    "date": "18/08/2026",
+    "weekday": "Terça-feira",
+    "month": "ago",
+    "objetivo": "Esclarecer o que é permitido e o que é proibido nas redes durante a campanha eleitoral.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 6,
+    "titulo": "Violência doméstica: como funciona a medida protetiva na prática",
+    "formato": "carrossel",
+    "area": "Direito da Família",
+    "tag": null,
+    "date": "21/08/2026",
+    "weekday": "Sexta-feira",
+    "month": "ago",
+    "objetivo": "Explicar o passo a passo da medida protetiva para quem precisa de proteção urgente.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 7,
+    "titulo": "Mito ou Verdade: \"Home office tira o direito a hora extra\"",
+    "formato": "unico",
+    "area": "Direito Trabalhista",
+    "tag": "📚 Mito ou Verdade — Série Trabalhista 2",
+    "date": "25/08/2026",
+    "weekday": "Terça-feira",
+    "month": "ago",
+    "objetivo": "Desmontar um mito trabalhista comum sobre home office e hora extra.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 8,
+    "titulo": "Doação em vida x herança: o que compensa mais",
+    "formato": "carrossel",
+    "area": "Direito das Sucessões",
+    "tag": null,
+    "date": "28/08/2026",
+    "weekday": "Sexta-feira",
+    "month": "ago",
+    "objetivo": "Comparar as duas formas de planejamento sucessório e ajudar o público a decidir.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 9,
+    "titulo": "Trabalho intermitente: seus direitos nesse tipo de contrato",
+    "formato": "carrossel",
+    "area": "Direito Trabalhista",
+    "tag": null,
+    "date": "01/09/2026",
+    "weekday": "Terça-feira",
+    "month": "set",
+    "objetivo": "Explicar os direitos de quem trabalha em regime intermitente e alertar sobre uso indevido pelas empresas.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 10,
+    "titulo": "Aposentadoria por idade x tempo de contribuição: qual escolher",
+    "formato": "carrossel",
+    "area": "Direito Previdenciário",
+    "tag": null,
+    "date": "04/09/2026",
+    "weekday": "Sexta-feira",
+    "month": "set",
+    "objetivo": "Comparar as regras vigentes de aposentadoria e evitar erro na hora de pedir o benefício.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 11,
+    "titulo": "Fake news na eleição: como denunciar e o que é crime eleitoral",
+    "formato": "carrossel",
+    "area": "Direito Eleitoral",
+    "tag": null,
+    "date": "08/09/2026",
+    "weekday": "Terça-feira",
+    "month": "set",
+    "objetivo": "Explicar o que caracteriza crime eleitoral de fake news e como denunciar.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 12,
+    "titulo": "Paternidade socioafetiva: quando o \"pai de coração\" vira pai legal",
+    "formato": "carrossel",
+    "area": "Direito da Família",
+    "tag": null,
+    "date": "11/09/2026",
+    "weekday": "Sexta-feira",
+    "month": "set",
+    "objetivo": "Explicar o reconhecimento legal da paternidade de afeto e os direitos que ela garante.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 13,
+    "titulo": "Dia do Cliente: obrigada por confiarem sua história a mim",
+    "formato": "unico",
+    "area": "Institucional",
+    "tag": "🛍️ Dia do Cliente",
+    "date": "15/09/2026",
+    "weekday": "Terça-feira",
+    "month": "set",
+    "objetivo": "Post temático de agradecimento aos clientes, reforçando confiança e proximidade.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 14,
+    "titulo": "Assédio sexual no trabalho: diferença para o assédio moral",
+    "formato": "carrossel",
+    "area": "Direito Trabalhista",
+    "tag": null,
+    "date": "18/09/2026",
+    "weekday": "Sexta-feira",
+    "month": "set",
+    "objetivo": "Diferenciar assédio moral e sexual no trabalho e orientar sobre como agir.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 15,
+    "titulo": "Mito ou Verdade: \"Quem tem doença grave só consegue aposentadoria por invalidez\"",
+    "formato": "unico",
+    "area": "Direito Previdenciário",
+    "tag": "📚 Mito ou Verdade — Série Previdenciária 3",
+    "date": "22/09/2026",
+    "weekday": "Terça-feira",
+    "month": "set",
+    "objetivo": "Desmontar o mito de que doença grave só dá direito à aposentadoria por invalidez.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 16,
+    "titulo": "Herança digital: o que acontece com suas contas quando você morre",
+    "formato": "carrossel",
+    "area": "Direito das Sucessões",
+    "tag": null,
+    "date": "25/09/2026",
+    "weekday": "Sexta-feira",
+    "month": "set",
+    "objetivo": "Explicar o que a lei já prevê sobre contas e bens digitais na sucessão.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 17,
+    "titulo": "Pensão alimentícia atrasada: prisão, penhora e outras formas de cobrar",
+    "formato": "carrossel",
+    "area": "Direito da Família",
+    "tag": null,
+    "date": "29/09/2026",
+    "weekday": "Terça-feira",
+    "month": "set",
+    "objetivo": "Mostrar as ferramentas legais para cobrar pensão atrasada: prisão civil, penhora e desconto em folha.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 18,
+    "titulo": "Título de eleitor com problema? Resolva antes de domingo",
+    "formato": "unico",
+    "area": "Direito Eleitoral",
+    "tag": "🗳️ Véspera do 1º turno (eleição em 04/10)",
+    "date": "02/10/2026",
+    "weekday": "Sexta-feira",
+    "month": "out",
+    "objetivo": "Orientar sobre pendências de título de eleitor às vésperas da votação.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 19,
+    "titulo": "Foi para o segundo turno? O que muda nas regras da campanha",
+    "formato": "carrossel",
+    "area": "Direito Eleitoral",
+    "tag": "🗳️ Pós 1º turno — regras do 2º turno",
+    "date": "06/10/2026",
+    "weekday": "Terça-feira",
+    "month": "out",
+    "objetivo": "Explicar o que muda nas regras de campanha para quem vai ao segundo turno.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 20,
+    "titulo": "Dia das Crianças: os direitos dos filhos que os pais esquecem",
+    "formato": "carrossel",
+    "area": "Direito da Família",
+    "tag": "🎈 Véspera do Dia das Crianças (12/10)",
+    "date": "09/10/2026",
+    "weekday": "Sexta-feira",
+    "month": "out",
+    "objetivo": "Reunir os direitos dos filhos em processos de separação, em tom comemorativo.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 21,
+    "titulo": "Home office: seus direitos no trabalho remoto",
+    "formato": "carrossel",
+    "area": "Direito Trabalhista",
+    "tag": null,
+    "date": "13/10/2026",
+    "weekday": "Terça-feira",
+    "month": "out",
+    "objetivo": "Explicar os direitos de quem trabalha remoto: jornada, custos e desconexão.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 22,
+    "titulo": "Salário-maternidade para autônoma e MEI: como funciona",
+    "formato": "carrossel",
+    "area": "Direito Previdenciário",
+    "tag": null,
+    "date": "16/10/2026",
+    "weekday": "Sexta-feira",
+    "month": "out",
+    "objetivo": "Explicar o direito ao salário-maternidade para autônomas e MEIs e evitar erros no pedido.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 23,
+    "titulo": "Post de humanização — o que ninguém vê no dia a dia da advocacia",
+    "formato": "unico",
+    "area": "Institucional",
+    "tag": null,
+    "date": "20/10/2026",
+    "weekday": "Terça-feira",
+    "month": "out",
+    "objetivo": "Humanizar a marca mostrando o lado pessoal da rotina de advocacia.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 24,
+    "titulo": "Segundo turno: dúvidas de última hora sobre voto e mesário",
+    "formato": "unico",
+    "area": "Direito Eleitoral",
+    "tag": "🗳️ Véspera do 2º turno (eleição em 25/10)",
+    "date": "23/10/2026",
+    "weekday": "Sexta-feira",
+    "month": "out",
+    "objetivo": "Resumo rápido de dúvidas sobre votação e mesário na véspera do segundo turno.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 25,
+    "titulo": "Aposentadoria do servidor público: como funciona o RPPS",
+    "formato": "carrossel",
+    "area": "Direito Previdenciário",
+    "tag": "🏛️ Véspera do Dia do Servidor Público (28/10)",
+    "date": "27/10/2026",
+    "weekday": "Terça-feira",
+    "month": "out",
+    "objetivo": "Explicar as regras específicas de aposentadoria do servidor público (RPPS), diferentes do INSS.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 26,
+    "titulo": "Post institucional de encerramento do trimestre",
+    "formato": "unico",
+    "area": "Institucional",
+    "tag": "📊 Encerramento do trimestre",
+    "date": "30/10/2026",
+    "weekday": "Sexta-feira",
+    "month": "out",
+    "objetivo": "Post institucional de fechamento, recapitulando o trimestre e reforçando especialidades.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  },
+  {
+    "numero": 27,
+    "titulo": "IN 212/2026: o que mudou nas regras do INSS",
+    "formato": "carrossel",
+    "area": "Direito Previdenciário",
+    "tag": "🚨 Urgente — Nova norma do INSS (IN 212/2026)",
+    "date": "20/08/2026",
+    "weekday": "Quinta-feira",
+    "month": "ago",
+    "objetivo": "Alertar sobre a nova instrução normativa do INSS que altera regras de contribuição, prorrogação e benefícios.",
+    "status": "pendente",
+    "link": "",
+    "aprovacao": "pendente",
+    "comentario": ""
+  }
+];
 
-let db = null;
-let stateRef = null;
-let firebaseReady = false;
+// ==========================================================================
+// CONTEÚDO INICIAL — REELS
+// ==========================================================================
+const reelsIniciais = [
+  {
+    "numero": 1,
+    "titulo": "IN 212/2026 na prática: 3 mudanças que afetam seu pedido de aposentadoria",
+    "area": "Direito Previdenciário",
+    "tag": "🚨 Complemento do carrossel da IN 212/2026",
+    "semana": "Semana de 18 a 22/08/2026",
+    "objetivo": "Reforçar em vídeo, com a Amanda falando pra câmera, a novidade da nova norma do INSS — alcança quem não para pra ler carrossel.",
+    "duracao": "40 a 50 segundos",
+    "status": "pendente",
+    "link": "",
+    "docUrl": "https://docs.google.com/document/d/1arl0sQuHGxJAyHeIC5fE47XSBMgOtyhBOoBKG6up-DE/edit"
+  },
+  {
+    "numero": 2,
+    "titulo": "Hora extra não registrada: como provar mesmo sem contracheque",
+    "area": "Direito Trabalhista",
+    "tag": null,
+    "semana": "Semana de 25 a 29/08/2026",
+    "objetivo": "Gerar identificação com trabalhadores sem prova formal, mostrando que ainda existe caminho jurídico.",
+    "duracao": "35 a 45 segundos",
+    "status": "pendente",
+    "link": "",
+    "docUrl": "https://docs.google.com/document/d/1ONRdnzEmXwAufS2ENB-b4jw_4nLNZervHFEV8Yisl18/edit"
+  },
+  {
+    "numero": 3,
+    "titulo": "Pode ou não pode nas redes na eleição? 3 perguntas rápidas",
+    "area": "Direito Eleitoral",
+    "tag": "🗳️ Período eleitoral em andamento",
+    "semana": "Semana de 18 a 22/08/2026",
+    "objetivo": "Formato dinâmico de pergunta e resposta pra gerar mais comentários e compartilhamento no tema eleitoral.",
+    "duracao": "30 a 40 segundos",
+    "status": "pendente",
+    "link": "",
+    "docUrl": "https://docs.google.com/document/d/1AtdPxekj-3JUVD76m_1TkQQqr6e5xNmKEK7OdxQTyKM/edit"
+  },
+  {
+    "numero": 4,
+    "titulo": "Um dia na advocacia: bastidores rápidos",
+    "area": "Institucional",
+    "tag": null,
+    "semana": "Semana de 01 a 05/09/2026",
+    "objetivo": "Humanizar a marca e mostrar rotina real — formato de vlog rápido, fácil de gravar sem produção extra.",
+    "duracao": "25 a 35 segundos",
+    "status": "pendente",
+    "link": "",
+    "docUrl": "https://docs.google.com/document/d/1jLMqDtUcEMqU_Kk5Ieb9i00TcEgy9RZ4ch6mcZYr7Cc/edit"
+  }
+];
 
-let publishedMap = {};
-let reviewState = { approval: "pending", comments: {} };
-let contentOverrides = {};
-let localState = { approval: "pending", comments: {}, published: {}, content: {} };
+// ==========================================================================
+// CONTEÚDO COMPLETO DO BRIEFING — fica só aqui no arquivo (não vai pro
+// Firestore). Chave = número do post / do reel.
+// ==========================================================================
+const postDetalhes = {
+  "3": {
+    "tipo": "unico",
+    "art": "Foto profissional da Amanda, fundo escuro elegante. Texto: \"11 de agosto — Dia do Advogado\". Subtexto: \"Minha toga não é sobre mim. É sobre quem precisa ser defendido.\"",
+    "caption": "Hoje é o meu dia — mas eu prefiro dividir ele com quem eu defendo. 🤍⚖️\n\nEscolhi o Direito porque acredito numa coisa simples: ninguém devia enfrentar sozinho o INSS, um ex-empregador, uma partilha injusta ou uma situação de violência. O advogado existe para equilibrar essa balança. Para transformar medo em informação. Para transformar \"não sei o que fazer\" em um plano.\n\nObrigada a cada cliente que confiou o próprio caso nas minhas mãos nesses anos. É por vocês que eu continuo.\n\n📩 link na bio",
+    "hashtags": [
+      "#diadoadvogado",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#advocacia",
+      "#11deagosto",
+      "#justiça"
+    ]
+  },
+  "4": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Auxílio-reclusão: o benefício que o INSS não anuncia\" — Subtítulo: \"Para famílias de quem está preso\""
+      },
+      {
+        "t": "Slide 2 — O que é?",
+        "b": "Benefício pago à família de segurado do INSS que é preso em regime fechado ou semiaberto, enquanto durar a prisão."
+      },
+      {
+        "t": "Slide 3 — Quem tem direito?",
+        "b": "Cônjuge ou companheiro(a) / Filhos menores de 21 anos ou inválidos / Pais, se comprovada dependência econômica."
+      },
+      {
+        "t": "Slide 4 — Quais as condições",
+        "b": "O preso precisa ter qualidade de segurado no momento da prisão / A renda dele antes da prisão precisa estar dentro do teto definido pelo INSS (baixa renda)."
+      },
+      {
+        "t": "Slide 5 — Erros que fazem o pedido ser negado",
+        "b": "Não comprovar o regime de prisão / Não atualizar a situação prisional periodicamente / Renda do preso acima do limite na data da prisão."
+      },
+      {
+        "t": "Slide 6 — Quando o benefício acaba",
+        "b": "Quando o preso é solto, foge, ou passa para regime aberto. A família precisa avisar o INSS a cada mudança de regime."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Família não devia pagar duas vezes pela prisão de alguém.\" CTA: \"Me chama e vamos ver se você tem direito. link na bio\""
+      }
+    ],
+    "caption": "Você sabia que a família de uma pessoa presa pode ter direito a um benefício do INSS? 🔒 O auxílio-reclusão existe exatamente para isso — e é um dos benefícios menos conhecidos (e mais mal explicados) da Previdência. No carrossel de hoje, explico quem tem direito e os erros que mais derrubam o pedido.\n\n👉 Arrasta e manda pra quem pode precisar.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#auxílioreclusão",
+      "#INSS",
+      "#benefício",
+      "#direitoprevidenciário",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#família"
+    ]
+  },
+  "5": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Propaganda eleitoral nas redes: o que pode e o que dá processo\" — Subtítulo: \"A campanha começou — saiba os limites\""
+      },
+      {
+        "t": "Slide 2 — O que já está liberado",
+        "b": "Desde meados de agosto, com o início oficial da propaganda eleitoral, compartilhar conteúdo de candidato, fazer post defendendo posição política e usar bottons/camisetas já são permitidos livremente."
+      },
+      {
+        "t": "Slide 3 — O que qualquer pessoa pode fazer",
+        "b": "Compartilhar posts de candidatos que apoia / Fazer live com o candidato, sem autorização / Declarar voto abertamente nas redes / Usar bottons, adesivos e camisetas."
+      },
+      {
+        "t": "Slide 4 — O que é proibido",
+        "b": "Impulsionar posts com dinheiro fora das regras do TSE / Criar perfil falso ou conteúdo enganoso / Empresa fazer propaganda paga em nome de candidato / Usar página de órgão público para campanha."
+      },
+      {
+        "t": "Slide 5 — Compartilhei algo duvidoso sem saber?",
+        "b": "Ignorância não isenta totalmente, mas o risco maior é de quem cria e de quem compartilha sabendo que é falso. Ainda assim, o ideal é sempre checar a fonte antes."
+      },
+      {
+        "t": "Slide 6 — Quando procurar um advogado eleitoral",
+        "b": "Se você é candidato ou assessor / Se foi alvo de conteúdo enganoso / Se sofreu pressão para votar em alguém / Se quer denunciar irregularidade."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Campanha nas redes também tem regra — e quem descumpre paga caro.\" CTA: \"Atendimento especializado em Direito Eleitoral: link na bio\""
+      }
+    ],
+    "caption": "A campanha esquentou — e as redes sociais estão no centro dela. 🗳️📱 No carrossel de hoje explico o que qualquer pessoa pode fazer nas redes durante a eleição, e o que já é considerado irregular.\n\n👉 Arrasta antes de compartilhar qualquer coisa duvidosa.\n💬 Ficou com alguma dúvida sobre o que pode ou não? Me conta aqui.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#direitoeleitoral",
+      "#eleições2026",
+      "#propagandaeleitoral",
+      "#fakenews",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#política"
+    ]
+  },
+  "6": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Medida protetiva: como pedir e o que ela garante\" — Subtítulo: \"Passo a passo para quem precisa de proteção\""
+      },
+      {
+        "t": "Slide 2 — O que é a medida protetiva?",
+        "b": "Decisão judicial que obriga o agressor a manter distância da vítima, podendo incluir afastamento do lar, proibição de contato e apreensão de arma."
+      },
+      {
+        "t": "Slide 3 — Como pedir?",
+        "b": "Na delegacia (qualquer uma, não precisa ser especializada) ou direto no fórum, com ou sem advogado. O pedido é gratuito."
+      },
+      {
+        "t": "Slide 4 — Em quanto tempo sai?",
+        "b": "A lei prevê decisão em até 48 horas após o pedido — sem precisar ouvir o agressor antes."
+      },
+      {
+        "t": "Slide 5 — O que a medida pode incluir",
+        "b": "Afastamento do agressor do lar / Proibição de aproximação e contato / Suspensão de porte de arma / Prestação de alimentos provisórios."
+      },
+      {
+        "t": "Slide 6 — E se o agressor descumprir?",
+        "b": "Descumprir medida protetiva é crime, com pena de prisão — e pode ser preso em flagrante."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda, tom acolhedor. Texto: \"Pedir ajuda não é exagero. É proteção.\" CTA: \"Atendimento sigiloso: link na bio\""
+      }
+    ],
+    "caption": "Se você está com medo de alguém que deveria te amar, saiba: existe caminho legal, e ele é mais rápido do que parece. 🛡️ No carrossel de hoje, explico como pedir uma medida protetiva, o que ela garante e o que acontece se o agressor descumprir.\n\n👉 Salva e manda pra quem possa precisar.\n💬 Estou aqui, sem julgamento.\n📩 Atendimento sigiloso: link na bio | @advamandareis",
+    "hashtags": [
+      "#medidaprotetiva",
+      "#violênciadoméstica",
+      "#leimariadapenha",
+      "#direitofamília",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#mulheres"
+    ]
+  },
+  "7": {
+    "tipo": "unico",
+    "art": "Arte em formato de quiz. Fundo escuro, texto destaque em vinho. Pergunta: \"MITO OU VERDADE? 'Trabalhar em home office tira o direito a hora extra.'\" Resposta: \"🚫 MITO — quem trabalha em home office com controle de jornada (ponto, horário fixo) tem direito a hora extra igual quem trabalha presencial.\"",
+    "caption": "📢 MITO OU VERDADE? \"Trabalhar em home office tira o direito a hora extra.\"\n\n🚫 MITO — e um dos erros mais repetidos pelas empresas.\n\nSe a sua empresa controla seu horário — ponto eletrônico, exigência de estar online em determinado período, cobrança de horário de entrada e saída — você tem direito a hora extra, mesmo trabalhando de casa. O que muda é só a forma de comprovar: prints, mensagens e e-mails viram prova.\n\n💬 Você trabalha em home office? Conta como funciona o controle de horário aí.\n📩 link na bio",
+    "hashtags": [
+      "#homeoffice",
+      "#horaextra",
+      "#direitotrabalhista",
+      "#CLT",
+      "#trabalhoremoto",
+      "#advogada",
+      "#amandareisadv",
+      "#Brasília"
+    ]
+  },
+  "8": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Doação em vida ou herança? Entenda antes de decidir\" — Subtítulo: \"Planejamento sucessório sem dor de cabeça\""
+      },
+      {
+        "t": "Slide 2 — O que é doação em vida?",
+        "b": "Transferência de bens feita pelo titular ainda vivo, para herdeiros ou terceiros, com regras específicas de imposto e limite."
+      },
+      {
+        "t": "Slide 3 — Vantagens da doação em vida",
+        "b": "Evita disputa entre herdeiros depois / Permite planejar a divisão com calma / Pode reduzir custos comparado a um inventário longo."
+      },
+      {
+        "t": "Slide 4 — Cuidados importantes",
+        "b": "A doação para herdeiro conta como adiantamento da herança (precisa ser levada em conta na partilha futura) / Precisa respeitar a legítima (50% dos bens reservada aos herdeiros necessários)."
+      },
+      {
+        "t": "Slide 5 — E o imposto?",
+        "b": "Incide o ITCMD tanto na doação quanto na herança — a alíquota é a mesma no DF, então o imposto sozinho não é motivo para escolher um ou outro."
+      },
+      {
+        "t": "Slide 6 — Quando vale mais a pena esperar o inventário",
+        "b": "Quando o patrimônio ainda gera renda que o titular precisa / Quando há risco de a doação gerar conflito familiar antecipado."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Não existe resposta única — existe a resposta certa para a sua família.\" CTA: \"Vamos planejar juntos. link na bio\""
+      }
+    ],
+    "caption": "Doar em vida ou deixar para o inventário? Essa é uma das perguntas que mais recebo em planejamento sucessório. 📋 No carrossel de hoje comparo as duas opções — vantagens, cuidados e quando cada uma faz mais sentido.\n\n👉 Arrasta e comece a planejar o patrimônio da sua família com calma.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#doaçãoemvida",
+      "#herança",
+      "#sucessões",
+      "#planejamentosucessório",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#patrimônio"
+    ]
+  },
+  "9": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Trabalho intermitente: seus direitos nesse tipo de contrato\" — Subtítulo: \"Para quem trabalha só quando é chamado\""
+      },
+      {
+        "t": "Slide 2 — O que é o contrato intermitente?",
+        "b": "Modalidade em que a empresa convoca o trabalhador com pelo menos 3 dias de antecedência, e o pagamento é feito só pelas horas efetivamente trabalhadas."
+      },
+      {
+        "t": "Slide 3 — Dá pra recusar a convocação?",
+        "b": "Sim. Recusar uma convocação não é falta grave nem motivo para demissão — o trabalhador tem até 1 dia útil para responder se aceita ou não."
+      },
+      {
+        "t": "Slide 4 — Direitos que você mantém",
+        "b": "Férias proporcionais / 13º proporcional / FGTS / Recolhimento ao INSS / Descanso semanal remunerado — tudo calculado por período efetivamente trabalhado."
+      },
+      {
+        "t": "Slide 5 — Onde mora o perigo",
+        "b": "Quando a empresa chama o trabalhador toda semana, no mesmo horário, como se fosse uma rotina fixa — mas sem dar os direitos de um contrato CLT comum."
+      },
+      {
+        "t": "Slide 6 — Isso pode virar vínculo empregatício comum?",
+        "b": "Sim. Se a convocação vira uma rotina disfarçada de intermitente, é possível pedir na Justiça o reconhecimento de vínculo CLT integral, com todos os direitos retroativos."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Intermitente de verdade tem regra. Intermitente disfarçado tem solução.\" CTA: \"Me manda sua rotina de convocações. link na bio\""
+      }
+    ],
+    "caption": "Trabalho intermitente é contrato de verdade — com direitos de verdade. 📲 Mas muita empresa usa esse modelo errado, chamando o funcionário toda semana como se fosse CLT comum, só pra pagar menos. No carrossel de hoje explico a diferença.\n\n👉 Arrasta e entenda se a sua rotina de trabalho está dentro da lei.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#trabalhointermitente",
+      "#direitotrabalhista",
+      "#CLT",
+      "#contrato",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#trabalhador"
+    ]
+  },
+  "10": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Aposentadoria por idade x tempo de contribuição\" — Subtítulo: \"Entenda as regras atuais antes de pedir\""
+      },
+      {
+        "t": "Slide 2 — Aposentadoria por idade (regra atual)",
+        "b": "Mulher: 62 anos / Homem: 65 anos, com no mínimo 15 anos de contribuição (mulher) ou 20 anos (homem), dentro das regras pós-reforma."
+      },
+      {
+        "t": "Slide 3 — Tempo de contribuição, hoje",
+        "b": "Não existe mais isolada — virou aposentadoria por pontos ou por tempo mínimo com idade progressiva, conforme a regra de transição de quem já contribuía antes de 2019."
+      },
+      {
+        "t": "Slide 4 — Regra de pontos",
+        "b": "Soma da idade + tempo de contribuição precisa atingir um número mínimo, que sobe a cada ano (ex.: 100/92 pontos, aumentando gradualmente)."
+      },
+      {
+        "t": "Slide 5 — Qual rende mais?",
+        "b": "Depende do histórico de contribuição de cada pessoa. Às vezes esperar 1-2 anos muda bastante o valor final do benefício — por isso o cálculo prévio é essencial."
+      },
+      {
+        "t": "Slide 6 — Erro comum",
+        "b": "Pedir aposentadoria pela primeira regra que aparece no Meu INSS, sem simular as outras — e perder valor no benefício para sempre."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Antes de pedir, simula. Depois de pedir, não tem volta.\" CTA: \"Me manda seu extrato — vamos simular juntos. link na bio\""
+      }
+    ],
+    "caption": "Existe mais de um caminho para se aposentar — e nem sempre o primeiro que aparece no Meu INSS é o melhor pra você. 🧮 No carrossel de hoje comparo as regras de idade e de tempo de contribuição hoje em vigor.\n\n👉 Arrasta antes de dar entrada no seu pedido.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#aposentadoria",
+      "#INSS",
+      "#direitoprevidenciário",
+      "#reformadaprevidência",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv"
+    ]
+  },
+  "11": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Fake news na eleição: como denunciar\" — Subtítulo: \"O que a lei considera crime eleitoral\""
+      },
+      {
+        "t": "Slide 2 — O que caracteriza fake news eleitoral?",
+        "b": "Divulgar fato que você sabe ser inverídico, capaz de causar dano à honra de candidato ou de afetar o resultado da eleição."
+      },
+      {
+        "t": "Slide 3 — Isso é crime?",
+        "b": "Sim. A divulgação de fake news com essa intenção é crime eleitoral, com pena de detenção e multa, previsto na legislação eleitoral."
+      },
+      {
+        "t": "Slide 4 — E quem só compartilha, sem ter criado?",
+        "b": "Também pode responder, principalmente se sabia (ou deveria saber, por ser algo obviamente falso) que o conteúdo era mentiroso."
+      },
+      {
+        "t": "Slide 5 — Como denunciar",
+        "b": "Pelo aplicativo Pardal do TSE / No site da Justiça Eleitoral / No Ministério Público Eleitoral — sempre com print, link e data como prova."
+      },
+      {
+        "t": "Slide 6 — Antes de compartilhar, confira",
+        "b": "Fonte da informação / Se outros veículos sérios também noticiaram / Data da publicação (fake news antiga reciclada é comum)."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Uma checada rápida evita um problema grande.\" CTA: \"Foi vítima de fake news numa campanha? Me chama. link na bio\""
+      }
+    ],
+    "caption": "Fake news na eleição não é \"só uma piada\" — é crime. ⚠️ No carrossel de hoje explico o que caracteriza fake news eleitoral, como denunciar e por que compartilhar sem checar também pode te trazer problema.\n\n👉 Arrasta e confere antes de repassar qualquer coisa nessa reta final de campanha.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#fakenews",
+      "#direitoeleitoral",
+      "#eleições2026",
+      "#TSE",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#política"
+    ]
+  },
+  "12": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Paternidade socioafetiva: quando o amor vira direito\" — Subtítulo: \"Entenda como reconhecer oficialmente\""
+      },
+      {
+        "t": "Slide 2 — O que é paternidade socioafetiva?",
+        "b": "É o reconhecimento legal de quem exerce o papel de pai (ou mãe) no dia a dia, mesmo sem laço biológico — como padrastos, madrastas ou pais de criação."
+      },
+      {
+        "t": "Slide 3 — O que é preciso para reconhecer?",
+        "b": "Comprovar a convivência afetiva contínua, cuidado, presença na criação e tratamento público como filho(a) — testemunhas, fotos, escola, plano de saúde ajudam."
+      },
+      {
+        "t": "Slide 4 — Onde fazer o reconhecimento?",
+        "b": "Pode ser feito direto no cartório de registro civil, sem precisar de processo judicial, quando há consenso entre as partes."
+      },
+      {
+        "t": "Slide 5 — Isso dá direito a herança?",
+        "b": "Sim. Uma vez reconhecida, a paternidade socioafetiva gera os mesmos direitos da paternidade biológica: herança, pensão, sobrenome."
+      },
+      {
+        "t": "Slide 6 — E se não houver consenso?",
+        "b": "Aí o reconhecimento precisa ser feito na Justiça, com prova da relação afetiva construída ao longo do tempo."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Família se define pelo cuidado — e a lei já reconhece isso.\" CTA: \"Me chama para orientar o reconhecimento. link na bio\""
+      }
+    ],
+    "caption": "Tem pai que não é do sangue — e nem por isso é menos pai. 💙 A paternidade socioafetiva já é reconhecida no Brasil, e garante os mesmos direitos de uma paternidade biológica. No carrossel de hoje explico como funciona o reconhecimento.\n\n👉 Arrasta e entenda seus direitos (ou os do seu filho de coração).\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#paternidadesocioafetiva",
+      "#direitofamília",
+      "#filiação",
+      "#reconhecimento",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#família"
+    ]
+  },
+  "13": {
+    "tipo": "unico",
+    "art": "Foto da Amanda em tom acolhedor. Texto: \"Dia do Cliente\". Subtexto: \"Cada caso que eu assino leva um pedaço da confiança de vocês.\"",
+    "caption": "Hoje é o Dia do Cliente — e eu quero aproveitar para agradecer. 🙏\n\nCada processo que chega até mim carrega uma história: uma aposentadoria que parecia impossível, uma pensão que ninguém explicava direito, uma família tentando se reorganizar depois de uma separação. Vocês confiam pedaços importantes da vida de vocês a mim — e eu não trato isso como rotina.\n\nObrigada por cada indicação, cada retorno, cada \"deu certo, doutora\".\n\n📩 Se você ainda não é cliente e precisa de ajuda, me chama. link na bio",
+    "hashtags": [
+      "#diadocliente",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#gratidão",
+      "#advocacia",
+      "#confiança"
+    ]
+  },
+  "14": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Assédio sexual no trabalho\" — Subtítulo: \"Entenda a diferença para o assédio moral — e como agir\""
+      },
+      {
+        "t": "Slide 2 — Assédio moral x assédio sexual",
+        "b": "Assédio moral humilha e desgasta emocionalmente, de forma repetida. Assédio sexual busca vantagem ou favor de natureza sexual, geralmente usando uma posição de poder."
+      },
+      {
+        "t": "Slide 3 — O que conta como assédio sexual",
+        "b": "Comentários com conotação sexual insistentes / Convites depois de recusa repetida / Toques sem consentimento / Ameaça velada de prejudicar quem não aceitar."
+      },
+      {
+        "t": "Slide 4 — Precisa ter contato físico para configurar?",
+        "b": "Não. Assédio sexual pode ser verbal, por mensagem, ou por insinuação repetida — o contato físico agrava, mas não é requisito."
+      },
+      {
+        "t": "Slide 5 — O que fazer",
+        "b": "Documentar tudo: mensagens, datas, testemunhas / Denunciar por escrito ao RH ou à ouvidoria / Buscar apoio jurídico antes de qualquer decisão sobre continuar ou não no emprego."
+      },
+      {
+        "t": "Slide 6 — Consequências jurídicas",
+        "b": "Além de ser crime, pode gerar rescisão indireta (o trabalhador sai e recebe como se tivesse sido demitido) e indenização por dano moral."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Assédio sexual não é 'cantada'. É crime.\" CTA: \"Atendimento sigiloso: link na bio\""
+      }
+    ],
+    "caption": "Assédio sexual no trabalho não é \"cantada\" — é crime, e tem nome jurídico. 🚫 No carrossel de hoje explico a diferença entre assédio moral e sexual, e o que fazer se você está vivendo isso.\n\n👉 Arrasta e manda para quem precisa saber.\n📩 Atendimento sigiloso: link na bio | @advamandareis",
+    "hashtags": [
+      "#assediosexual",
+      "#assediomoral",
+      "#direitotrabalhista",
+      "#CLT",
+      "#trabalho",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv"
+    ]
+  },
+  "15": {
+    "tipo": "unico",
+    "art": "Arte em formato de quiz. Fundo escuro, destaque em vinho. Pergunta: \"MITO OU VERDADE? 'Quem tem doença grave só consegue aposentadoria por invalidez.'\" Resposta: \"🚫 MITO — dependendo da doença e da idade, pode ser mais vantajoso pedir aposentadoria por idade ou por tempo de contribuição, se já tiver os requisitos.\"",
+    "caption": "📢 MITO OU VERDADE? \"Quem tem doença grave só consegue aposentadoria por invalidez.\"\n\n🚫 MITO. A aposentadoria por invalidez é só um dos caminhos — e nem sempre o mais vantajoso. Se a pessoa já tem idade ou tempo de contribuição suficiente, pode valer mais a pena pedir aposentadoria por idade ou por tempo de contribuição, que costuma ter valor maior e regras de acúmulo diferentes.\n\nO ideal é sempre simular todas as opções antes de decidir qual pedir.\n\n💬 Você já passou por essa dúvida? Me conta aqui.\n📩 link na bio",
+    "hashtags": [
+      "#aposentadoria",
+      "#invalidez",
+      "#INSS",
+      "#direitoprevidenciário",
+      "#advogada",
+      "#amandareisadv",
+      "#Brasília"
+    ]
+  },
+  "16": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Herança digital: redes sociais, e-mails e criptomoedas\" — Subtítulo: \"O que a lei já prevê — e o que ainda é zona cinzenta\""
+      },
+      {
+        "t": "Slide 2 — O que é herança digital?",
+        "b": "Conjunto de bens e contas digitais deixados por alguém que falece: redes sociais, e-mails, contas em nuvem, criptomoedas, milhas aéreas, contas de jogos."
+      },
+      {
+        "t": "Slide 3 — Redes sociais têm direito próprio?",
+        "b": "Cada plataforma tem sua política — Instagram e Facebook permitem \"perfil memorial\" ou remoção mediante pedido da família com documento de óbito."
+      },
+      {
+        "t": "Slide 4 — E as criptomoedas?",
+        "b": "Entram no inventário como qualquer outro bem — mas só se a família souber que existem e tiver acesso às chaves/senhas. Sem isso, o valor pode se perder para sempre."
+      },
+      {
+        "t": "Slide 5 — O que fazer em vida para proteger a família",
+        "b": "Deixar uma lista de contas e um gestor de senhas compartilhado com pessoa de confiança / Mencionar bens digitais relevantes no testamento."
+      },
+      {
+        "t": "Slide 6 — Vale a pena colocar no testamento?",
+        "b": "Sim, principalmente para bens de valor (cripto, contas monetizadas, domínios) — evita disputa e perda de acesso."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Seu patrimônio também é digital — e merece planejamento.\" CTA: \"Vamos incluir isso no seu planejamento sucessório. link na bio\""
+      }
+    ],
+    "caption": "Você já parou pra pensar no que acontece com suas contas quando você morre? 💻 Herança digital ainda é pouco discutida — mas cripto, contas monetizadas e até perfis em redes sociais entram na conversa sobre sucessão. No carrossel de hoje explico o que já está previsto em lei e o que você pode fazer para proteger sua família.\n\n👉 Arrasta e repensa seu planejamento.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#herançadigital",
+      "#sucessões",
+      "#testamento",
+      "#criptomoedas",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#planejamento"
+    ]
+  },
+  "17": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Pensão atrasada: como cobrar de verdade\" — Subtítulo: \"Conheça as ferramentas que a lei te dá\""
+      },
+      {
+        "t": "Slide 2 — Primeiro passo",
+        "b": "Ação de execução de alimentos na Vara de Família, apresentando o cálculo do valor devido e o título (acordo ou sentença)."
+      },
+      {
+        "t": "Slide 3 — Rito da prisão civil",
+        "b": "Usado para as 3 últimas parcelas vencidas. Se o devedor não paga nem justifica, o juiz pode decretar prisão civil de 1 a 3 meses — e a dívida continua existindo depois."
+      },
+      {
+        "t": "Slide 4 — Rito da penhora",
+        "b": "Para dívidas mais antigas, usa-se o rito de penhora de bens e bloqueio de contas (Sisbajud), sem prisão, mas com bloqueio direto do dinheiro."
+      },
+      {
+        "t": "Slide 5 — Desconto direto em folha",
+        "b": "Se o devedor tem emprego formal, o juiz pode determinar desconto automático direto no salário — a forma mais eficaz de garantir o pagamento contínuo."
+      },
+      {
+        "t": "Slide 6 — E se o devedor for autônomo e \"sumir\"?",
+        "b": "Existe a possibilidade de inclusão do nome nos órgãos de proteção ao crédito e até suspensão da CNH e do passaporte em casos de inadimplência contumaz."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Pensão atrasada tem solução — e ela é mais rápida do que parece.\" CTA: \"Me manda o valor devido — vamos calcular e cobrar. link na bio\""
+      }
+    ],
+    "caption": "Pensão atrasada não precisa virar sofrimento eterno — a lei dá ferramentas fortes para cobrar. ⚖️ No carrossel de hoje explico as diferenças entre prisão civil, penhora e desconto em folha — e quando usar cada uma.\n\n👉 Arrasta antes de desistir de cobrar o que é do seu filho.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#pensãoalimentícia",
+      "#direitofamília",
+      "#execuçãodealimentos",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#família"
+    ]
+  },
+  "18": {
+    "tipo": "unico",
+    "art": "Arte com elementos eleitorais, fundo escuro. Texto: \"Domingo tem eleição. Seu título está em ordem?\" Subtexto: \"O que fazer até a véspera da votação.\"",
+    "caption": "Domingo é dia de eleição — e ainda dá tempo de resolver pendência simples no seu título. 🗳️\n\nSe você não sabe seu local de votação, é só consultar no app e-Título ou no site do TSE. Se você não puder votar por estar fora do seu domicílio eleitoral, é possível justificar a ausência pelo mesmo aplicativo, no próprio dia.\n\nNão votar e não justificar pode gerar multa e pendências para tirar passaporte, prestar concurso público ou renovar documentos.\n\n📩 Dúvida sobre direito eleitoral? me chama. link na bio",
+    "hashtags": [
+      "#eleições2026",
+      "#tituloeleitor",
+      "#TSE",
+      "#votação",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#cidadania"
+    ]
+  },
+  "19": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Segundo turno: o que muda nas regras\" — Subtítulo: \"Só concorrem presidente e governador — entenda o resto\""
+      },
+      {
+        "t": "Slide 2 — Quem disputa o segundo turno?",
+        "b": "Apenas cargos de Presidente da República e Governador (quando nenhum candidato atinge maioria absoluta no primeiro turno). Demais cargos já foram definidos."
+      },
+      {
+        "t": "Slide 3 — Novo prazo de propaganda",
+        "b": "A propaganda eleitoral gratuita no rádio e TV para o segundo turno recomeça poucos dias após o resultado do primeiro turno, com tempo dividido só entre os dois candidatos remanescentes."
+      },
+      {
+        "t": "Slide 4 — Doações e financiamento",
+        "b": "Os candidatos do segundo turno podem receber novas doações dentro do limite de campanha, mesmo já tendo gastado parte do teto no primeiro turno."
+      },
+      {
+        "t": "Slide 5 — Coligações e apoios",
+        "b": "Partidos que não foram para o segundo turno podem declarar apoio formal a um dos dois candidatos remanescentes, mesmo sem ter integrado a chapa original."
+      },
+      {
+        "t": "Slide 6 — E as redes sociais nesse período?",
+        "b": "As mesmas regras de proibição de fake news e impulsionamento irregular continuam valendo até o dia da votação do segundo turno."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"A eleição não termina no primeiro domingo de outubro.\" CTA: \"Dúvidas sobre a reta final? Me chama. link na bio\""
+      }
+    ],
+    "caption": "O resultado do primeiro turno saiu — e para presidente e governador, a disputa pode continuar. 🗳️ No carrossel de hoje explico o que muda nas regras para quem vai ao segundo turno.\n\n👉 Arrasta e fica por dentro da reta final.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#segundoturno",
+      "#eleições2026",
+      "#direitoeleitoral",
+      "#TSE",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#política"
+    ]
+  },
+  "20": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Dia das Crianças: direitos que todo filho tem\" — Subtítulo: \"E que muito pai e mãe esquece de garantir\""
+      },
+      {
+        "t": "Slide 2 — Direito à convivência com os dois pais",
+        "b": "Mesmo em casos de separação conturbada, a lei garante que a criança tenha convivência com ambos os genitores — salvo risco comprovado."
+      },
+      {
+        "t": "Slide 3 — Direito a ser ouvida",
+        "b": "Em processos de guarda e visitas, a criança (a partir de idade e maturidade suficientes) pode ser ouvida pelo juiz sobre sua vontade — o chamado direito de opinião."
+      },
+      {
+        "t": "Slide 4 — Direito a pensão compatível com a vida que tinha",
+        "b": "A pensão alimentícia deve, na medida do possível, manter o padrão de vida que a criança tinha antes da separação dos pais."
+      },
+      {
+        "t": "Slide 5 — Direito a não ser usada como \"arma\"",
+        "b": "Usar a criança para atacar o ex-parceiro, seja escondendo informações ou fazendo comentários negativos, pode configurar alienação parental."
+      },
+      {
+        "t": "Slide 6 — Direito à herança e ao sobrenome, mesmo fora do casamento",
+        "b": "Filhos nascidos fora do casamento têm exatamente os mesmos direitos sucessórios e de reconhecimento que filhos nascidos dentro dele."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda, tom acolhedor. Texto: \"Direito de criança não é sobre os pais — é sobre ela.\" CTA: \"Feliz Dia das Crianças 💛 | link na bio\""
+      }
+    ],
+    "caption": "Feliz Dia das Crianças a todas as famílias que acompanho. 💛 Separação de pais acontece — mas os direitos da criança não podem ser esquecidos no meio do processo. No carrossel de hoje, reunião dos direitos que toda criança tem e que às vezes se perdem na disputa dos adultos.\n\n👉 Arrasta e compartilha com quem está passando por separação com filhos.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#diadascrianças",
+      "#direitofamília",
+      "#guarda",
+      "#pensãoalimentícia",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#filhos"
+    ]
+  },
+  "21": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Home office: seus direitos no trabalho remoto\" — Subtítulo: \"Trabalhar de casa não é sinônimo de 'sem direitos'\""
+      },
+      {
+        "t": "Slide 2 — A empresa precisa controlar sua jornada?",
+        "b": "Não é obrigatório — mas se ela controla (ponto, exigência de disponibilidade em horário fixo), os mesmos direitos da CLT valem: hora extra, intervalo, adicional noturno."
+      },
+      {
+        "t": "Slide 3 — Quem paga os custos do home office?",
+        "b": "A lei prevê que despesas com equipamento, internet e infraestrutura devem ser acordadas em contrato — podem ficar, total ou parcialmente, com a empresa."
+      },
+      {
+        "t": "Slide 4 — Direito à desconexão",
+        "b": "A empresa não pode exigir resposta fora do horário combinado. Cobrança fora de hora, de forma repetida, pode virar hora extra ou até dano moral."
+      },
+      {
+        "t": "Slide 5 — Contrato de home office nunca foi formalizado?",
+        "b": "Isso não retira seus direitos — só dificulta a prova. Guarde prints e mensagens que mostrem sua rotina real de trabalho."
+      },
+      {
+        "t": "Slide 6 — Híbrido também conta",
+        "b": "As mesmas regras valem para quem trabalha parte da semana em casa e parte no escritório — o contrato deve deixar claro os dias e o regime de cada um."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Home office tem regra — e ela existe para te proteger.\" CTA: \"Sua empresa nunca formalizou isso? Me chama. link na bio\""
+      }
+    ],
+    "caption": "Home office não é sinônimo de \"sem direitos\". 💻 No carrossel de hoje explico o que a lei já garante para quem trabalha remoto — de hora extra a reembolso de despesas.\n\n👉 Arrasta e confere se sua empresa está cumprindo.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#homeoffice",
+      "#trabalhoremoto",
+      "#direitotrabalhista",
+      "#CLT",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#trabalhador"
+    ]
+  },
+  "22": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Salário-maternidade para autônoma e MEI\" — Subtítulo: \"Você tem direito, mesmo sem carteira assinada\""
+      },
+      {
+        "t": "Slide 2 — Quem tem direito?",
+        "b": "Autônomas, MEIs, contribuintes individuais e facultativas que estejam em dia com a contribuição ao INSS na data do parto ou adoção."
+      },
+      {
+        "t": "Slide 3 — Qual o valor?",
+        "b": "Para contribuinte individual e facultativa: 1/12 da soma dos últimos 12 salários de contribuição. Para MEI: 1 salário mínimo, fixo."
+      },
+      {
+        "t": "Slide 4 — Quanto tempo dura?",
+        "b": "120 dias, os mesmos da CLT — contados a partir do parto, ou da data da adoção/guarda, no caso de adoção."
+      },
+      {
+        "t": "Slide 5 — Precisa de quantos meses de contribuição?",
+        "b": "Em regra, 10 meses de carência — exceto em caso de parto prematuro, quando a carência é reduzida proporcionalmente."
+      },
+      {
+        "t": "Slide 6 — Erro que mais atrasa o pedido",
+        "b": "Atraso ou falta no pagamento da guia DAS (MEI) ou GPS (contribuinte individual) nos meses anteriores ao parto — isso pode gerar negativa."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Empreender não tira o seu direito à licença-maternidade.\" CTA: \"Me manda seu extrato de contribuição. link na bio\""
+      }
+    ],
+    "caption": "Empreendedora também tem direito à licença-maternidade — só que poucas sabem como pedir certo. 👶 No carrossel de hoje explico o valor, o prazo e a carência para MEI e autônoma.\n\n👉 Arrasta e manda pra alguma empreendedora grávida que você conhece.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#saláriomaternidade",
+      "#MEI",
+      "#autônoma",
+      "#INSS",
+      "#direitoprevidenciário",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv"
+    ]
+  },
+  "23": {
+    "tipo": "unico",
+    "art": "Foto da Amanda em momento mais pessoal (estudando, no carro entre audiências, etc.). Texto sobreposto: \"Tem processo que eu levo comigo até fora do expediente.\" Assinatura discreta.",
+    "caption": "Tem casos que eu não esqueço quando saio do escritório. 💼\n\nUma mãe que finalmente conseguiu a pensão do filho. Um trabalhador que recebeu tudo que tinha direito depois de anos de silêncio. Uma família que conseguiu fechar o inventário sem brigar.\n\nA advocacia não é só processo e prazo — é gente. E cada gente que passa por aqui carrega uma expectativa que eu levo a sério.\n\nObrigada por confiarem sua história a mim.\n\n📩 link na bio",
+    "hashtags": [
+      "#advocacia",
+      "#humanização",
+      "#propósito",
+      "#amandareisadv",
+      "#Brasília",
+      "#advogada",
+      "#bastidores"
+    ]
+  },
+  "24": {
+    "tipo": "unico",
+    "art": "Arte com elementos eleitorais sutis, fundo escuro. Texto: \"Domingo é o segundo turno.\" Subtexto: \"Quem vota, quem foi convocado mesário e como justificar ausência — resumo rápido.\" Assinatura Amanda.",
+    "caption": "Reta final do segundo turno — resumo rápido para não ter dúvida no domingo. 🗳️\n\nSó vota quem votou (ou justificou) no primeiro turno — no mesmo local de sempre. Foi convocado mesário? Isso garante folga no dia seguinte e preferência em concurso público de mesmo cargo, entre outros benefícios. Não vai poder votar? Dá pra justificar pelo app e-Título em até 60 dias depois da eleição, sem multa.\n\n📩 Alguma dúvida sobre o dia da votação? Me manda aqui. link na bio",
+    "hashtags": [
+      "#segundoturno",
+      "#eleições2026",
+      "#votação",
+      "#TSE",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#cidadania"
+    ]
+  },
+  "25": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"Aposentadoria do servidor público: entenda o RPPS\" — Subtítulo: \"Regras diferentes do INSS — e por isso geram tanta dúvida\""
+      },
+      {
+        "t": "Slide 2 — O que é RPPS?",
+        "b": "Regime Próprio de Previdência Social, aplicável a servidores públicos efetivos (federais, estaduais, distritais e municipais), com regras próprias, diferentes do INSS (RGPS)."
+      },
+      {
+        "t": "Slide 3 — Quais as regras gerais hoje",
+        "b": "Idade mínima e tempo de contribuição definidos pela reforma de cada ente federativo, geralmente com pedágio para quem já estava no cargo antes da mudança de regra."
+      },
+      {
+        "t": "Slide 4 — Integralidade e paridade",
+        "b": "Servidores que ingressaram antes de determinadas datas podem ter direito a se aposentar com o valor integral do último salário e com os mesmos reajustes dos servidores ativos — regra que não existe mais para quem entra hoje."
+      },
+      {
+        "t": "Slide 5 — E quem entrou depois da reforma?",
+        "b": "Em geral, o cálculo passa a considerar a média das contribuições, semelhante ao modelo do INSS, sem integralidade automática."
+      },
+      {
+        "t": "Slide 6 — Erro comum",
+        "b": "Não considerar o tempo de contribuição em regime anterior (CLT ou outro ente público) na hora de somar o tempo total — o que pode antecipar (ou atrasar) a aposentadoria."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Servidor público também precisa simular antes de pedir.\" CTA: \"Me manda seu tempo de serviço — vamos simular. link na bio\""
+      }
+    ],
+    "caption": "Amanhã é o Dia do Servidor Público — e é para vocês esse carrossel de hoje. 🏛️ O RPPS tem regras bem diferentes do INSS, e a maior parte das dúvidas que recebo de servidores é sobre integralidade, paridade e tempo de contribuição misto.\n\n👉 Arrasta e entenda como funciona a sua aposentadoria.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#servidorpúblico",
+      "#RPPS",
+      "#aposentadoria",
+      "#direitoprevidenciário",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv"
+    ]
+  },
+  "26": {
+    "tipo": "unico",
+    "art": "Foto profissional da Amanda. Texto: \"3 meses. Uma eleição. Centenas de dúvidas respondidas.\" Subtexto: \"Obrigada por seguir esse perfil e confiar no meu trabalho. Seguimos.\" Especialidades listadas discretamente.",
+    "caption": "Fechamos mais um trimestre intenso — com eleição no meio do caminho e muita gente precisando de orientação jurídica de verdade. ⚖️\n\nAqui nesse perfil eu me comprometo a continuar trazendo informação clara, sem juridiquês e sem intimidação — porque direito que ninguém entende não protege ninguém.\n\nObrigada por cada curtida, comentário, compartilhamento e mensagem no direct. Tem muito mais vindo por aí.\n\n📩 Me chama: link na bio\n📌 Especialidades: INSS · Família · Sucessões · Trabalhista · Eleitoral",
+    "hashtags": [
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#INSS",
+      "#família",
+      "#trabalhista",
+      "#obrigada",
+      "#direitopratodos"
+    ]
+  },
+  "27": {
+    "tipo": "carrossel",
+    "slides": [
+      {
+        "t": "Slide 1 (Capa)",
+        "b": "Arte: \"IN 212/2026: o que mudou nas regras do INSS\" — Subtítulo: \"Nova instrução normativa altera contribuições, prorrogação de benefício e mais\""
+      },
+      {
+        "t": "Slide 2 — O que mudou nas contribuições",
+        "b": "Contribuições de 5%, 11% e 12% passam a ser consideradas para aposentadoria programada e por idade. Para contagem recíproca e aposentadoria por tempo de contribuição, ainda é preciso complementar até 20%."
+      },
+      {
+        "t": "Slide 3 — Sem carteira assinada?",
+        "b": "Em vínculos sem remuneração registrada, o INSS pode considerar o salário mínimo como base — com possibilidade de recálculo mediante apresentação de documentos que comprovem os salários reais."
+      },
+      {
+        "t": "Slide 4 — Trabalho parcial ou intermitente",
+        "b": "Para quem trabalha em regime parcial ou intermitente, a remuneração precisa ser comprovada para o cálculo correto do salário de contribuição."
+      },
+      {
+        "t": "Slide 5 — Benefício por incapacidade",
+        "b": "A prorrogação pode ser solicitada nos últimos 15 dias do benefício, quando o prazo concedido não for suficiente para a recuperação."
+      },
+      {
+        "t": "Slide 6 — Auxílio-acidente e pensão por morte",
+        "b": "No auxílio-acidente, a lista do Anexo III do RPS passa a ser exemplificativa — uma situação fora da lista não impede a análise do caso. Filho nascido após o óbito do segurado tem direito ao benefício a partir do nascimento."
+      },
+      {
+        "t": "Slide 7 (CTA)",
+        "b": "Foto da Amanda. Texto: \"Ficou alguma dúvida sobre como isso afeta o seu caso?\" CTA: \"Me chama e vamos analisar seu processo. link na bio\""
+      }
+    ],
+    "caption": "🚨 Saiu uma norma nova do INSS — a IN PRES/INSS nº 212/2026 — e ela muda regras importantes de contribuição, prorrogação de benefício por incapacidade e outros pontos da Previdência. 📌\n\nNo carrossel de hoje resumo o que mudou, sem juridiquês.\n\n👉 Arrasta e salva pra consultar quando precisar.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#INSS",
+      "#IN212",
+      "#direitoprevidenciário",
+      "#aposentadoria",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv"
+    ]
+  }
+};
+const reelDetalhes = {
+  "1": {
+    "gancho": "\"Se você tem processo de aposentadoria parado no INSS, presta atenção nesse vídeo.\"",
+    "resumo": [
+      "Contribuições de 5%, 11% e 12% agora contam pra aposentadoria por idade e programada.",
+      "Sem carteira assinada? O INSS pode considerar o salário mínimo — com direito a recálculo se houver comprovação.",
+      "Benefício por incapacidade acabando? Dá pra pedir prorrogação, mas só nos últimos 15 dias do prazo."
+    ],
+    "cta": "\"Se alguma dessas situações é a sua, não deixa pra depois. Manda uma mensagem que eu te explico o que fazer com o seu caso. Link na bio.\"",
+    "legenda": "A nova instrução normativa do INSS mudou regras importantes — e pode estar afetando seu pedido sem você saber. 📌\n\nSalva esse vídeo e manda pra quem tem processo parado.\n\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#INSS",
+      "#aposentadoria",
+      "#direitoprevidenciário",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv",
+      "#IN212"
+    ]
+  },
+  "2": {
+    "gancho": "\"Seu chefe nunca registrou sua hora extra? Isso não significa que você não tem direito.\"",
+    "resumo": [
+      "A lei não exige só contracheque — print de WhatsApp, mensagens, ponto biométrico e testemunhas também valem como prova.",
+      "O importante é mostrar uma rotina — não precisa provar dia por dia.",
+      "Vale tanto pra quem já saiu da empresa quanto pra quem ainda está lá."
+    ],
+    "cta": "\"Guardou alguma prova dessas? Separa tudo antes de conversar comigo. Link na bio pra atendimento.\"",
+    "legenda": "Hora extra sem registro formal não é hora extra perdida. 💼 Separei os tipos de prova que mais funcionam na prática.\n\n👉 Salva esse vídeo pra quando precisar.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#horaextra",
+      "#direitotrabalhista",
+      "#CLT",
+      "#trabalhador",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv"
+    ]
+  },
+  "3": {
+    "gancho": "\"Três perguntas rápidas sobre o que pode ou não pode na eleição. Testa seu conhecimento.\"",
+    "resumo": [
+      "Compartilhar post de candidato sem autorização? Pode.",
+      "Fazer live com o candidato sem autorização? Também pode.",
+      "Impulsionar post político fora das regras do TSE? Não pode."
+    ],
+    "cta": "\"Ficou alguma dúvida sobre o que fazer nessa eleição? Comenta aqui ou me chama no direct. Link na bio.\"",
+    "legenda": "Testa seu conhecimento: você sabe o que pode e o que não pode nas redes durante a eleição? 🗳️\n\n👉 Comenta se acertou todas.\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#direitoeleitoral",
+      "#eleições2026",
+      "#TSE",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv"
+    ]
+  },
+  "4": {
+    "gancho": "\"Um dia normal aqui no escritório, em menos de 30 segundos.\"",
+    "resumo": [
+      "8h — organizando os processos do dia.",
+      "10h — atendimento (sem expor dados de cliente).",
+      "12h — conferindo prazos no computador.",
+      "14h — saindo pra audiência."
+    ],
+    "cta": "\"Cada processo aqui é uma pessoa que confiou em mim pra resolver um problema sério. É por isso que eu faço o que eu faço.\"",
+    "legenda": "Um dia (bem resumido) da minha rotina como advogada. 💼 Por trás de cada processo tem uma história — e é isso que me faz continuar.\n\n📩 link na bio | @advamandareis",
+    "hashtags": [
+      "#bastidores",
+      "#advocacia",
+      "#rotina",
+      "#advogada",
+      "#Brasília",
+      "#amandareisadv"
+    ]
+  }
+};
 
-let openSet = new Set();
-let editMode = false;
+// ==========================================================================
+// A partir daqui é o motor do painel — não precisa mexer.
+// ==========================================================================
+
+const statusMeta = {
+  pendente: { label: "Pendente", pillClass: "pendente" },
+  producao: { label: "Em produção", pillClass: "producao" },
+  pronto:   { label: "Pronto", pillClass: "pronto" }
+};
+const statusMetaReel = {
+  pendente: { label: "Pendente", pillClass: "pendente" },
+  producao: { label: "Em gravação", pillClass: "producao" },
+  pronto:   { label: "Gravado", pillClass: "pronto" }
+};
+
+function areaKey(area){
+  if(area.includes('Trabalhista')) return 'trabalhista';
+  if(area.includes('Previdenciário')) return 'previdenciario';
+  if(area.includes('Família')) return 'familia';
+  if(area.includes('Sucessões')) return 'sucessoes';
+  if(area.includes('Eleitoral')) return 'eleitoral';
+  return 'institucional';
+}
+
+let posts = [];
+let reels = [];
+let isAdmin = false;
+let currentFilterPosts = "todos";
+let currentFilterReels = "todos";
+const openBriefings = new Set();
+const openReelBriefings = new Set();
+let docRef = null;
+let dbRefs = null;
 let isTyping = false;
 let pendingRenderAfterTyping = false;
 const saveTimers = {};
 
-function isFirebaseConfigured(){
-  return firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith("COLE_AQUI");
+function pad(n){ return String(n).padStart(2, "0"); }
+function hojeFormatado(){
+  const d = new Date();
+  return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`;
+}
+function escapeHtml(str){
+  return String(str == null ? "" : str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+function escapeAttr(str){ return escapeHtml(str).replace(/"/g,"&quot;"); }
+
+function showSetupMessage(html){
+  document.getElementById("setupMessage").style.display = "block";
+  document.getElementById("setupMessage").innerHTML = html;
+  document.getElementById("appContent").style.display = "none";
 }
 
-function setSyncBadge(state){
-  const el = document.getElementById("syncBadge");
-  if(!el) return;
-  if(state === "online"){ el.textContent = "🟢 Sincronizado ao vivo"; el.className = "sync-badge online"; }
-  else if(state === "local"){ el.textContent = "🟡 Modo local — configure o Firebase para sincronizar"; el.className = "sync-badge local"; }
-  else { el.textContent = "🔴 Erro de sincronização — salvando só neste navegador"; el.className = "sync-badge error"; }
-}
-
-function applyRemoteState(data){
-  publishedMap = data.published || {};
-  reviewState.approval = data.approval || "pending";
-  reviewState.comments = data.comments || {};
-  contentOverrides = data.content || {};
-  if(isTyping){ pendingRenderAfterTyping = true; return; }
-  render();
-}
-
-function setDeep(obj, dottedPath, value){
-  const parts = dottedPath.split(".");
-  let cur = obj;
-  for(let i = 0; i < parts.length - 1; i++){
-    if(!cur[parts[i]] || typeof cur[parts[i]] !== "object") cur[parts[i]] = {};
-    cur = cur[parts[i]];
-  }
-  cur[parts[parts.length - 1]] = value;
-}
-
-async function loadLocalFallback(){
-  try{
-    const raw = localStorage.getItem(LOCAL_KEY);
-    localState = raw ? JSON.parse(raw) : { approval: "pending", comments: {}, published: {}, content: {} };
-  }catch(e){
-    localState = { approval: "pending", comments: {}, published: {}, content: {} };
-  }
-  applyRemoteState(localState);
-}
-
-async function writeField(path, value){
-  if(firebaseReady && stateRef){
-    try{
-      await updateDoc(stateRef, { [path]: value });
-      return;
-    }catch(e){
-      console.error("Erro ao salvar no Firestore, caindo pro modo local:", e);
-      setSyncBadge("error");
-    }
-  }
-  setDeep(localState, path, value);
-  try{ localStorage.setItem(LOCAL_KEY, JSON.stringify(localState)); }catch(e){ /* sem storage disponível */ }
-}
-
-async function initBackend(){
-  if(!isFirebaseConfigured()){
-    console.warn("Firebase não configurado — rodando em modo local (localStorage), sem sincronizar entre pessoas.");
-    setSyncBadge("local");
-    await loadLocalFallback();
+async function initFirebase(){
+  const isPlaceholder = Object.values(firebaseConfig).some(v => String(v).includes("COLE_AQUI"));
+  if(isPlaceholder){
+    showSetupMessage(`<strong>Falta configurar o Firebase</strong> Abra o arquivo, procure por <code>firebaseConfig</code> e cole os dados do projeto.`);
     return;
   }
   try{
     const app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
-    stateRef = doc(db, FIRESTORE_COLLECTION, FIRESTORE_DOC);
-    await setDoc(stateRef, { approval: "pending", comments: {}, published: {}, content: {} }, { merge: true });
-    firebaseReady = true;
-    onSnapshot(stateRef, (snap) => {
-      applyRemoteState(snap.data() || {});
-      setSyncBadge("online");
-    }, (err) => {
-      console.error("Erro de sincronização com o Firestore:", err);
-      setSyncBadge("error");
+    const db = getFirestore(app);
+    docRef = doc(db, FIRESTORE_COLLECTION, FIRESTORE_DOC);
+    dbRefs = { getDoc, setDoc, onSnapshot };
+
+    const snap = await getDoc(docRef);
+
+    if(!snap.exists()){
+      await setDoc(docRef, { posts: postsIniciais, reels: reelsIniciais, ultimaAtualizacao: hojeFormatado() });
+    } else {
+      const data = snap.data();
+      let precisaAtualizar = false;
+
+      const postsAtual = data.posts || [];
+      const numerosExistentes = new Set(postsAtual.map(p => p.numero));
+      postsIniciais.forEach(p => {
+        if(!numerosExistentes.has(p.numero)){
+          postsAtual.push(p);
+          precisaAtualizar = true;
+        }
+      });
+
+      const reelsAtual = data.reels || [];
+      const numerosReelsExistentes = new Set(reelsAtual.map(r => r.numero));
+      reelsIniciais.forEach(r => {
+        if(!numerosReelsExistentes.has(r.numero)){
+          reelsAtual.push(r);
+          precisaAtualizar = true;
+        }
+      });
+
+      if(precisaAtualizar){
+        await setDoc(docRef, { posts: postsAtual, reels: reelsAtual }, { merge: true });
+      }
+    }
+
+    onSnapshot(docRef, (snapshot) => {
+      const data = snapshot.data();
+      if(!data) return;
+      posts = data.posts || [];
+      reels = data.reels || [];
+      document.getElementById("dataAtualizacao").textContent = data.ultimaAtualizacao || "—";
+      document.getElementById("appContent").style.display = "block";
+      document.getElementById("setupMessage").style.display = "none";
+      if(isTyping){ pendingRenderAfterTyping = true; return; }
+      renderAll();
     });
-  }catch(e){
-    console.error("Falha ao iniciar o Firebase, caindo pro modo local:", e);
-    firebaseReady = false;
-    setSyncBadge("local");
-    await loadLocalFallback();
+
+  } catch(err){
+    showSetupMessage(`<strong>Não consegui conectar ao Firebase</strong> Confira o <code>firebaseConfig</code> e se o Firestore foi ativado. Detalhe: ${err.message}`);
   }
 }
 
-/* ---------- Ações do usuário ---------- */
-function toggleDone(id){
-  publishedMap[id] = !publishedMap[id];
-  render();
-  writeField("published." + id, publishedMap[id]);
+async function salvarPosts(){
+  if(!docRef || !dbRefs) return;
+  await dbRefs.setDoc(docRef, { posts, ultimaAtualizacao: hojeFormatado() }, { merge: true });
+}
+async function salvarReels(){
+  if(!docRef || !dbRefs) return;
+  await dbRefs.setDoc(docRef, { reels, ultimaAtualizacao: hojeFormatado() }, { merge: true });
 }
 
-function setApproval(value){
-  reviewState.approval = reviewState.approval === value ? "pending" : value;
-  renderApprovalCard();
-  writeField("approval", reviewState.approval);
+function computeStats(items){
+  const total = items.length;
+  const prontos = items.filter(p => p.status === "pronto").length;
+  const producao = items.filter(p => p.status === "producao").length;
+  const pendentes = items.filter(p => p.status === "pendente").length;
+  const pct = total ? Math.round((prontos / total) * 100) : 0;
+  return { total, prontos, producao, pendentes, pct };
 }
 
-function updateComment(id, text){
-  reviewState.comments[id] = text;
-  const key = "comment:" + id;
-  if(saveTimers[key]) clearTimeout(saveTimers[key]);
-  saveTimers[key] = setTimeout(() => { writeField("comments." + id, text); }, 500);
+function renderStatsBlock(stats, ids){
+  document.getElementById(ids.total).textContent = stats.total;
+  document.getElementById(ids.pronto).textContent = stats.prontos;
+  document.getElementById(ids.producao).textContent = stats.producao;
+  document.getElementById(ids.pendente).textContent = stats.pendentes;
+  document.getElementById(ids.pct).textContent = stats.pct + "%";
+  document.getElementById(ids.fill).style.width = stats.pct + "%";
+  const pos = Math.min(Math.max(stats.pct, 3), 97);
+  document.getElementById(ids.marker).style.left = pos + "%";
 }
 
-function updateContentField(id, field, value){
-  if(!contentOverrides[id]) contentOverrides[id] = {};
-  contentOverrides[id][field] = value;
-  const key = "content:" + id + ":" + field;
-  if(saveTimers[key]) clearTimeout(saveTimers[key]);
-  saveTimers[key] = setTimeout(() => { writeField("content." + id + "." + field, value); }, 500);
-}
-
-function updateSlideField(id, idx, subfield, value){
-  if(!contentOverrides[id]) contentOverrides[id] = {};
-  if(!contentOverrides[id].slides) contentOverrides[id].slides = {};
-  if(!contentOverrides[id].slides[idx]) contentOverrides[id].slides[idx] = {};
-  contentOverrides[id].slides[idx][subfield] = value;
-  const key = "slide:" + id + ":" + idx + ":" + subfield;
-  if(saveTimers[key]) clearTimeout(saveTimers[key]);
-  saveTimers[key] = setTimeout(() => { writeField("content." + id + ".slides." + idx + "." + subfield, value); }, 500);
-}
-
-function toggleEditMode(){
-  if(!editMode){
-    const pass = window.prompt("Senha do modo edição:");
-    if(pass !== EDIT_PASSPHRASE){
-      if(pass !== null) alert("Senha incorreta.");
-      return;
-    }
+function buildPostBriefingHtml(numero){
+  const det = postDetalhes[numero];
+  if(!det) return "<p>Sem detalhamento cadastrado.</p>";
+  let html = "";
+  if(det.tipo === "unico"){
+    html += `<div><div class="bd-label">Arte / conteúdo visual</div><p class="bd-art">${escapeHtml(det.art)}</p></div>`;
+  } else {
+    html += `<div><div class="bd-label">Conteúdo dos slides</div><div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">`;
+    det.slides.forEach(s => {
+      html += `<div class="bd-slide"><div class="bd-slide-t">${escapeHtml(s.t)}</div><div class="bd-slide-b">${escapeHtml(s.b)}</div></div>`;
+    });
+    html += `</div></div>`;
   }
-  editMode = !editMode;
-  const btn = document.getElementById("editModeBtn");
-  btn.classList.toggle("active", editMode);
-  btn.textContent = editMode ? "✏️ Modo edição: ON" : "✏️ Modo edição";
-  render();
-}
-
-/* ---------- Helpers de conteúdo efetivo (base + edições salvas) ---------- */
-function escapeHtml(str){
-  return String(str == null ? "" : str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-}
-function escapeAttr(str){
-  return escapeHtml(str).replace(/"/g,"&quot;");
-}
-
-function getEffectivePost(post){
-  const o = contentOverrides[post.id] || {};
-  const eff = {
-    title: o.title !== undefined ? o.title : post.title,
-    tag: o.tag !== undefined ? o.tag : post.tag,
-    caption: o.caption !== undefined ? o.caption : post.caption,
-    art: post.format === "unico" ? (o.art !== undefined ? o.art : post.art) : undefined,
-    slides: post.format === "carrossel" ? post.slides.map((s, idx) => {
-      const so = (o.slides && o.slides[idx]) || {};
-      return { t: so.t !== undefined ? so.t : s.t, b: so.b !== undefined ? so.b : s.b };
-    }) : undefined
-  };
-  return eff;
-}
-
-function computeStats(){
-  const total = POSTS.length;
-  const done = POSTS.filter(p => publishedMap[p.id]).length;
-  const withComment = POSTS.filter(p => reviewState.comments[p.id] && reviewState.comments[p.id].trim()).length;
-  const perMonth = { ago: {d:0,t:0}, set: {d:0,t:0}, out: {d:0,t:0} };
-  POSTS.forEach(p => {
-    perMonth[p.month].t++;
-    if(publishedMap[p.id]) perMonth[p.month].d++;
-  });
-  return { total, done, withComment, perMonth };
-}
-
-function slideBlock(post, eff){
-  if(post.format === "unico"){
-    const body = editMode
-      ? '<textarea class="edit-field edit-art" data-id="'+post.id+'" data-field="art">'+escapeHtml(eff.art)+'</textarea>'
-      : '<p class="detail-art">'+escapeHtml(eff.art)+'</p>';
-    return '<div class="detail-block"><div class="detail-label">Arte / conteúdo visual</div>'+body+'</div>';
-  }
-  let html = '<div class="detail-block"><div class="detail-label">Conteúdo dos slides</div><div class="slides">';
-  eff.slides.forEach((s, idx) => {
-    if(editMode){
-      html += '<div class="slide slide-edit">'+
-        '<input class="edit-field edit-slide-t" data-id="'+post.id+'" data-idx="'+idx+'" data-slidefield="t" value="'+escapeAttr(s.t)+'">'+
-        '<textarea class="edit-field edit-slide-b" data-id="'+post.id+'" data-idx="'+idx+'" data-slidefield="b">'+escapeHtml(s.b)+'</textarea>'+
-      '</div>';
-    }else{
-      html += '<div class="slide"><div class="slide-t">'+escapeHtml(s.t)+'</div><div class="slide-b">'+escapeHtml(s.b)+'</div></div>';
-    }
-  });
-  html += '</div></div>';
+  html += `<div><div class="bd-label">Legenda completa</div><p class="bd-caption">${escapeHtml(det.caption).replace(/\n/g,"<br>")}</p>`;
+  html += `<div class="bd-hashtags">${det.hashtags.map(h => `<span class="bd-hashtag">${escapeHtml(h)}</span>`).join("")}</div></div>`;
   return html;
 }
 
-function renderCard(post){
-  const eff = getEffectivePost(post);
-  const done = !!publishedMap[post.id];
-  const isOpen = openSet.has(post.id);
-  const ak = areaKey(post.area);
-  const hashHtml = post.hashtags.map(h => '<span class="hashtag">'+h+'</span>').join("");
-  const commentVal = reviewState.comments[post.id] || "";
-
-  const titleHtml = editMode
-    ? '<input class="edit-field edit-title" data-id="'+post.id+'" data-field="title" value="'+escapeAttr(eff.title)+'">'
-    : '<span class="post-title">'+escapeHtml(eff.title)+'</span>';
-
-  const tagHtml = editMode
-    ? '<input class="edit-field edit-tag" data-id="'+post.id+'" data-field="tag" placeholder="Observação (opcional)" value="'+escapeAttr(eff.tag || "")+'">'
-    : (eff.tag ? '<div class="post-tag">'+escapeHtml(eff.tag)+'</div>' : "");
-
-  const captionHtml = editMode
-    ? '<textarea class="edit-field edit-caption" data-id="'+post.id+'" data-field="caption">'+escapeHtml(eff.caption)+'</textarea>'
-    : '<p class="caption">'+escapeHtml(eff.caption).replace(/\n/g,"<br>")+'</p>';
-
-  return ""+
-  '<article class="post-card '+(done?"is-done":"")+" "+(isOpen?"is-open":"")+" "+(editMode?"is-editing":"")+'" data-id="'+post.id+'" data-month="'+post.month+'" data-status="'+(done?"done":"pending")+'">'+
-    '<button class="post-header" data-action="toggle-expand" aria-expanded="'+isOpen+'">'+
-      '<span class="post-num">#'+String(post.num).padStart(2,"0")+'</span>'+
-      '<span class="post-header-main">'+
-        '<span class="post-date-row">'+
-          '<span class="post-date">'+post.weekday+' — '+post.date+'</span>'+
-          '<span class="badge format-badge">'+FORMAT_LABELS[post.format]+'</span>'+
-          '<span class="badge area-badge area-'+ak+'">'+post.area+'</span>'+
-        '</span>'+
-        titleHtml+
-        tagHtml+
-      '</span>'+
-      '<span class="stamp-wrap">'+
-        '<button class="stamp-btn '+(done?"stamped":"")+'" data-action="toggle-done" aria-pressed="'+done+'" aria-label="Marcar post '+post.num+' como publicado" title="Marcar como publicado">'+
-          (done ? '<span class="stamp-ink">PUBLICADO<br>✓</span>' : '<span class="stamp-empty">marcar<br>publicado</span>')+
-        '</button>'+
-      '</span>'+
-    '</button>'+
-    '<div class="post-body">'+
-      '<div class="status-banner '+(done?"done":"pending")+'">'+
-        (done ? "✔ Já publicado — selo aplicado neste post." : "○ Ainda não publicado — marque o selo acima quando publicar.")+
-      '</div>'+
-      slideBlock(post, eff)+
-      '<div class="detail-block">'+
-        '<div class="detail-label">Legenda completa</div>'+
-        captionHtml+
-        '<div class="hashtags">'+hashHtml+'</div>'+
-      '</div>'+
-      '<div class="detail-block review-block">'+
-        '<div class="detail-label">Sugestão de alteração (cliente)</div>'+
-        '<textarea class="comment-box" data-id="'+post.id+'" placeholder="O que você gostaria de mudar neste post? Deixe em branco se estiver aprovado como está.">'+escapeHtml(commentVal)+'</textarea>'+
-      '</div>'+
-    '</div>'+
-  '</article>';
+function buildReelResumoHtml(numero){
+  const det = reelDetalhes[numero];
+  if(!det) return "<p>Sem roteiro cadastrado.</p>";
+  let html = `<div class="bd-gancho"><b>Gancho</b>${escapeHtml(det.gancho)}</div>`;
+  html += `<div><div class="bd-label">Resumo do roteiro</div><ul class="bd-resumo" style="margin-top:8px;">`;
+  det.resumo.forEach(r => { html += `<li>${escapeHtml(r)}</li>`; });
+  html += `</ul></div>`;
+  html += `<div class="bd-cta"><b>CTA</b>${escapeHtml(det.cta)}</div>`;
+  html += `<div><div class="bd-label">Legenda sugerida</div><p class="bd-caption">${escapeHtml(det.legenda).replace(/\n/g,"<br>")}</p>`;
+  html += `<div class="bd-hashtags">${det.hashtags.map(h => `<span class="bd-hashtag">${escapeHtml(h)}</span>`).join("")}</div></div>`;
+  html += `<p style="font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-soft);">📄 O roteiro completo, cena a cena, está no Google Docs — abra pelo botão abaixo.</p>`;
+  return html;
 }
 
-function renderApprovalCard(){
-  const state = reviewState.approval;
-  const label = state === "approved" ? "✔ Briefing aprovado" : state === "rejected" ? "↺ Alterações solicitadas" : "Ainda não avaliado";
-  const el = document.getElementById("approvalCurrent");
-  el.textContent = label;
-  el.className = "approval-current state-"+state;
-  document.querySelectorAll(".approval-btn").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.approval === state);
+/* ---------------- POSTS ---------------- */
+
+function renderPostsGrid(){
+  const grid = document.getElementById("gridPosts");
+  grid.innerHTML = "";
+
+  posts.forEach((p, index) => {
+    const meta = statusMeta[p.status] || statusMeta.pendente;
+    const ak = areaKey(p.area);
+    const card = document.createElement("div");
+    card.className = "card" + (isAdmin ? " editing" : "");
+    card.dataset.status = p.status;
+    if(currentFilterPosts !== "todos" && p.status !== currentFilterPosts){
+      card.classList.add("hidden");
+    }
+
+    const tagHtml = p.tag ? `<span class="badge tag-badge">${escapeHtml(p.tag)}</span>` : "";
+    const formatoLabel = p.formato === "carrossel" ? "Carrossel" : "Post Único";
+
+    let footerHtml;
+    if(isAdmin){
+      footerHtml = `
+        <div class="edit-controls">
+          <div class="edit-row">
+            <select class="edit-input" data-field="status">
+              <option value="pendente" ${p.status === "pendente" ? "selected" : ""}>Pendente</option>
+              <option value="producao" ${p.status === "producao" ? "selected" : ""}>Em produção</option>
+              <option value="pronto" ${p.status === "pronto" ? "selected" : ""}>Pronto</option>
+            </select>
+          </div>
+          <div class="edit-row">
+            <input class="edit-input" type="text" placeholder="Link da arte (opcional)" data-field="link" value="${escapeAttr(p.link || "")}">
+            <button class="btn-save" data-index="${index}">Salvar</button>
+          </div>
+          <div class="save-feedback" id="feedback-post-${index}"></div>
+        </div>
+      `;
+    } else {
+      const aprovacao = p.aprovacao || "pendente";
+      const linkBtn = (p.status === "pronto" && p.link) ? `<a class="btn-link" href="${escapeAttr(p.link)}" target="_blank" rel="noopener">Ver arte →</a>` : "";
+      footerHtml = `
+        ${linkBtn}
+        <div class="approval-row">
+          <button class="approve-btn aprovar ${aprovacao === "aprovado" ? "active" : ""}" data-numero="${p.numero}" data-value="aprovado">✅ Aprovar</button>
+          <button class="approve-btn alterar ${aprovacao === "alteracao" ? "active" : ""}" data-numero="${p.numero}" data-value="alteracao">↺ Solicitar alteração</button>
+        </div>
+        ${aprovacao === "alteracao" ? `<textarea class="comment-box" data-numero="${p.numero}" placeholder="O que você gostaria de mudar nesse post?">${escapeHtml(p.comentario || "")}</textarea>` : ""}
+      `;
+    }
+
+    const briefingKey = "post-" + p.numero;
+    const isOpen = openBriefings.has(briefingKey);
+
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="card-num">#${pad(p.numero)}</div>
+        <div class="pill ${meta.pillClass}">${meta.label}</div>
+      </div>
+      <h3>${escapeHtml(p.titulo)}</h3>
+      <div class="badges-row">
+        <span class="badge format-badge">${formatoLabel}</span>
+        <span class="badge area-badge area-${ak}">${escapeHtml(p.area)}</span>
+        ${tagHtml}
+      </div>
+      <div class="objetivo">${escapeHtml(p.objetivo)}</div>
+      <button class="briefing-toggle ${isOpen ? "open" : ""}" data-key="${briefingKey}">
+        Ver briefing completo <span class="chevron">▾</span>
+      </button>
+      <div class="briefing-detail ${isOpen ? "open" : ""}" id="briefing-${briefingKey}">
+        ${buildPostBriefingHtml(p.numero)}
+      </div>
+      <div class="card-footer">${footerHtml}</div>
+    `;
+
+    grid.appendChild(card);
   });
-}
 
-function render(){
-  const stats = computeStats();
-  document.getElementById("statDone").textContent = stats.done;
-  document.getElementById("statTotal").textContent = stats.total;
-  const pct = stats.total ? Math.round((stats.done/stats.total)*100) : 0;
-  document.getElementById("progressFill").style.width = pct+"%";
-  document.getElementById("progressPct").textContent = pct+"%";
-  document.getElementById("commentCount").textContent = stats.withComment;
-
-  ["ago","set","out"].forEach(m => {
-    const el = document.querySelector('[data-tab="'+m+'"] .tab-count');
-    if(el) el.textContent = stats.perMonth[m].d+"/"+stats.perMonth[m].t;
+  grid.querySelectorAll(".briefing-toggle").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.key;
+      const detail = document.getElementById(`briefing-${key}`);
+      if(openBriefings.has(key)){ openBriefings.delete(key); btn.classList.remove("open"); detail.classList.remove("open"); }
+      else { openBriefings.add(key); btn.classList.add("open"); detail.classList.add("open"); }
+    });
   });
 
-  const activeMonth = document.querySelector(".tab.active").dataset.tab;
-  const activeStatus = document.querySelector(".chip.active").dataset.status;
-
-  const list = document.getElementById("postsList");
-  const filtered = POSTS.filter(p => {
-    if(activeMonth !== "todos" && p.month !== activeMonth) return false;
-    if(activeStatus === "pendentes" && publishedMap[p.id]) return false;
-    if(activeStatus === "publicados" && !publishedMap[p.id]) return false;
-    return true;
-  });
-
-  if(filtered.length === 0){
-    list.innerHTML = '<div class="empty">Nenhum post encontrado com esse filtro.</div>';
-    return;
-  }
-
-  list.innerHTML = filtered.map(renderCard).join("");
-  renderApprovalCard();
-}
-
-function buildSummaryText(){
-  const state = reviewState.approval;
-  const label = state === "approved" ? "Aprovado" : state === "rejected" ? "Reprovado / com pedido de alterações" : "Ainda não avaliado";
-  let lines = [];
-  lines.push("Revisão do briefing @advamandareis — Agosto a Outubro 2026");
-  lines.push("Status geral: " + label);
-  lines.push("");
-  const withComments = POSTS.filter(p => reviewState.comments[p.id] && reviewState.comments[p.id].trim());
-  if(withComments.length === 0){
-    lines.push("Nenhuma alteração pontual solicitada em posts específicos.");
-  }else{
-    lines.push("Alterações solicitadas por post:");
-    withComments.forEach(p => {
-      lines.push("");
-      lines.push("#"+String(p.num).padStart(2,"0")+" — "+p.date+" — "+p.title);
-      lines.push("→ " + reviewState.comments[p.id].trim());
+  if(isAdmin){
+    grid.querySelectorAll(".btn-save").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const idx = Number(btn.dataset.index);
+        const card = btn.closest(".card");
+        const status = card.querySelector('[data-field="status"]').value;
+        const link = card.querySelector('[data-field="link"]').value.trim();
+        const feedback = document.getElementById(`feedback-post-${idx}`);
+        feedback.textContent = "Salvando...";
+        try{
+          posts[idx].status = status;
+          posts[idx].link = link;
+          await salvarPosts();
+          feedback.textContent = "✓ Salvo — já visível pra todo mundo";
+          setTimeout(() => { feedback.textContent = ""; }, 2500);
+        }catch(err){
+          feedback.textContent = "Erro ao salvar: " + err.message;
+        }
+      });
+    });
+  } else {
+    grid.querySelectorAll(".approve-btn").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const numero = Number(btn.dataset.numero);
+        const value = btn.dataset.value;
+        const post = posts.find(p => p.numero === numero);
+        if(!post) return;
+        post.aprovacao = post.aprovacao === value ? "pendente" : value;
+        renderPostsGrid();
+        try{ await salvarPosts(); }catch(e){ /* silencioso */ }
+      });
+    });
+    grid.querySelectorAll(".comment-box").forEach(box => {
+      box.addEventListener("input", () => {
+        const numero = Number(box.dataset.numero);
+        const post = posts.find(p => p.numero === numero);
+        if(!post) return;
+        post.comentario = box.value;
+        const key = "comment-" + numero;
+        if(saveTimers[key]) clearTimeout(saveTimers[key]);
+        saveTimers[key] = setTimeout(() => { salvarPosts(); }, 600);
+      });
+      box.addEventListener("focus", () => { isTyping = true; });
+      box.addEventListener("blur", () => {
+        isTyping = false;
+        if(pendingRenderAfterTyping){ pendingRenderAfterTyping = false; renderAll(); }
+      });
     });
   }
-  return lines.join("\n");
 }
 
-async function copySummary(){
-  const text = buildSummaryText();
-  const btn = document.getElementById("copySummaryBtn");
-  try{
-    await navigator.clipboard.writeText(text);
-    const original = btn.textContent;
-    btn.textContent = "✓ Copiado!";
-    setTimeout(() => { btn.textContent = original; }, 1800);
-  }catch(e){
-    window.prompt("Copie o resumo abaixo:", text);
+/* ---------------- REELS ---------------- */
+
+function renderReelsGrid(){
+  const grid = document.getElementById("gridReels");
+  grid.innerHTML = "";
+
+  reels.forEach((r, index) => {
+    const meta = statusMetaReel[r.status] || statusMetaReel.pendente;
+    const ak = areaKey(r.area);
+    const card = document.createElement("div");
+    card.className = "card" + (isAdmin ? " editing" : "");
+    card.dataset.status = r.status;
+    if(currentFilterReels !== "todos" && r.status !== currentFilterReels){
+      card.classList.add("hidden");
+    }
+
+    const tagHtml = r.tag ? `<span class="badge tag-badge">${escapeHtml(r.tag)}</span>` : "";
+
+    let footerHtml;
+    if(isAdmin){
+      footerHtml = `
+        <div class="edit-controls">
+          <div class="edit-row">
+            <select class="edit-input" data-field="status">
+              <option value="pendente" ${r.status === "pendente" ? "selected" : ""}>Pendente</option>
+              <option value="producao" ${r.status === "producao" ? "selected" : ""}>Em gravação</option>
+              <option value="pronto" ${r.status === "pronto" ? "selected" : ""}>Gravado</option>
+            </select>
+          </div>
+          <div class="edit-row">
+            <input class="edit-input" type="text" placeholder="Link do reel publicado (opcional)" data-field="link" value="${escapeAttr(r.link || "")}">
+          </div>
+          <div class="edit-row">
+            <input class="edit-input" type="text" placeholder="Link do Google Docs (roteiro)" data-field="docUrl" value="${escapeAttr(r.docUrl || "")}">
+            <button class="btn-save" data-index="${index}">Salvar</button>
+          </div>
+          <div class="save-feedback" id="feedback-reel-${index}"></div>
+        </div>
+      `;
+    } else {
+      const linkBtn = (r.status === "pronto" && r.link) ? `<a class="btn-link" href="${escapeAttr(r.link)}" target="_blank" rel="noopener">Ver reel publicado →</a>` : "";
+      footerHtml = `
+        ${linkBtn}
+        <a class="gdoc-btn" href="${escapeAttr(r.docUrl)}" target="_blank" rel="noopener">📄 Abrir briefing do Reel no Google Docs</a>
+      `;
+    }
+
+    const briefingKey = "reel-" + r.numero;
+    const isOpen = openReelBriefings.has(briefingKey);
+
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="card-num">REEL ${pad(r.numero)}</div>
+        <div class="pill ${meta.pillClass}">${meta.label}</div>
+      </div>
+      <h3>${escapeHtml(r.titulo)}</h3>
+      <div class="badges-row">
+        <span class="badge format-badge">Reels</span>
+        <span class="badge area-badge area-${ak}">${escapeHtml(r.area)}</span>
+        ${tagHtml}
+      </div>
+      <div class="objetivo">${escapeHtml(r.objetivo)}</div>
+      <div class="duracao-note">⏱ ${escapeHtml(r.duracao)} · 🗓 ${escapeHtml(r.semana)}</div>
+      <button class="briefing-toggle ${isOpen ? "open" : ""}" data-key="${briefingKey}">
+        Ver resumo do roteiro <span class="chevron">▾</span>
+      </button>
+      <div class="briefing-detail ${isOpen ? "open" : ""}" id="briefing-${briefingKey}">
+        ${buildReelResumoHtml(r.numero)}
+      </div>
+      <div class="card-footer">${footerHtml}</div>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  grid.querySelectorAll(".briefing-toggle").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.key;
+      const detail = document.getElementById(`briefing-${key}`);
+      if(openReelBriefings.has(key)){ openReelBriefings.delete(key); btn.classList.remove("open"); detail.classList.remove("open"); }
+      else { openReelBriefings.add(key); btn.classList.add("open"); detail.classList.add("open"); }
+    });
+  });
+
+  if(isAdmin){
+    grid.querySelectorAll(".btn-save").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const idx = Number(btn.dataset.index);
+        const card = btn.closest(".card");
+        const status = card.querySelector('[data-field="status"]').value;
+        const link = card.querySelector('[data-field="link"]').value.trim();
+        const docUrl = card.querySelector('[data-field="docUrl"]').value.trim();
+        const feedback = document.getElementById(`feedback-reel-${idx}`);
+        feedback.textContent = "Salvando...";
+        try{
+          reels[idx].status = status;
+          reels[idx].link = link;
+          reels[idx].docUrl = docUrl;
+          await salvarReels();
+          feedback.textContent = "✓ Salvo — já visível pra todo mundo";
+          setTimeout(() => { feedback.textContent = ""; }, 2500);
+        }catch(err){
+          feedback.textContent = "Erro ao salvar: " + err.message;
+        }
+      });
+    });
   }
 }
 
-function updateMailLink(){
-  const text = buildSummaryText();
-  const link = document.getElementById("mailSummaryBtn");
-  link.href = "mailto:?subject=" + encodeURIComponent("Revisão do briefing @advamandareis") + "&body=" + encodeURIComponent(text);
+/* ---------------- GERAL ---------------- */
+
+function renderAll(){
+  renderStatsBlock(computeStats(posts), {
+    total:"postsStatTotal", pronto:"postsStatPronto", producao:"postsStatProducao",
+    pendente:"postsStatPendente", pct:"postsStatPct", fill:"postsTrackFill", marker:"postsTrackMarker"
+  });
+  renderStatsBlock(computeStats(reels), {
+    total:"reelsStatTotal", pronto:"reelsStatPronto", producao:"reelsStatProducao",
+    pendente:"reelsStatPendente", pct:"reelsStatPct", fill:"reelsTrackFill", marker:"reelsTrackMarker"
+  });
+
+  const aprovados = posts.filter(p => p.aprovacao === "aprovado").length;
+  const alteracao = posts.filter(p => p.aprovacao === "alteracao").length;
+  const aguardando = posts.length - aprovados - alteracao;
+  document.getElementById("postsAprovados").textContent = aprovados;
+  document.getElementById("postsAlteracao").textContent = alteracao;
+  document.getElementById("postsAguardando").textContent = aguardando;
+
+  renderPostsGrid();
+  renderReelsGrid();
 }
 
-function initInteractions(){
-  document.getElementById("postsList").addEventListener("click", (e) => {
-    const stampBtn = e.target.closest('[data-action="toggle-done"]');
-    if(stampBtn){
-      e.stopPropagation();
-      toggleDone(stampBtn.closest(".post-card").dataset.id);
+function wireFilters(){
+  document.querySelectorAll("#filtersPosts .filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#filtersPosts .filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilterPosts = btn.dataset.filter;
+      renderAll();
+    });
+  });
+  document.querySelectorAll("#filtersReels .filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#filtersReels .filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilterReels = btn.dataset.filter;
+      renderAll();
+    });
+  });
+}
+
+function wireEditToggle(){
+  const btn = document.getElementById("editToggle");
+  btn.addEventListener("click", () => {
+    if(isAdmin){
+      isAdmin = false;
+      btn.textContent = "🔓 Editar";
+      btn.classList.remove("on");
+      renderAll();
       return;
     }
-    const headerBtn = e.target.closest('[data-action="toggle-expand"]');
-    if(headerBtn){
-      const card = headerBtn.closest(".post-card");
-      const id = card.dataset.id;
-      const isOpen = card.classList.toggle("is-open");
-      headerBtn.setAttribute("aria-expanded", isOpen);
-      if(isOpen) openSet.add(id); else openSet.delete(id);
+    const senha = prompt("Senha do painel:");
+    if(senha === ADMIN_PASSWORD){
+      isAdmin = true;
+      btn.textContent = "🔒 Sair da edição";
+      btn.classList.add("on");
+      renderAll();
+    } else if(senha !== null){
+      alert("Senha incorreta.");
     }
   });
-
-  document.getElementById("postsList").addEventListener("input", (e) => {
-    const box = e.target.closest(".comment-box");
-    if(box){ updateComment(box.dataset.id, box.value); return; }
-    const field = e.target.closest(".edit-field");
-    if(field){
-      if(field.dataset.slidefield){
-        updateSlideField(field.dataset.id, field.dataset.idx, field.dataset.slidefield, field.value);
-      }else{
-        updateContentField(field.dataset.id, field.dataset.field, field.value);
-      }
-    }
-  });
-
-  document.addEventListener("focusin", (e) => {
-    if(e.target.matches(".comment-box, .edit-field")) isTyping = true;
-  });
-  document.addEventListener("focusout", (e) => {
-    if(e.target.matches(".comment-box, .edit-field")){
-      isTyping = false;
-      if(pendingRenderAfterTyping){ pendingRenderAfterTyping = false; render(); }
-    }
-  });
-
-  document.querySelectorAll(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      render();
-    });
-  });
-
-  document.querySelectorAll(".chip").forEach(chip => {
-    chip.addEventListener("click", () => {
-      document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-      chip.classList.add("active");
-      render();
-    });
-  });
-
-  document.querySelectorAll(".approval-btn").forEach(btn => {
-    btn.addEventListener("click", () => setApproval(btn.dataset.approval));
-  });
-
-  document.getElementById("copySummaryBtn").addEventListener("click", copySummary);
-  document.getElementById("mailSummaryBtn").addEventListener("click", updateMailLink);
-  document.getElementById("editModeBtn").addEventListener("click", toggleEditMode);
 }
 
-async function init(){
-  initInteractions();
-  await initBackend();
-  updateMailLink();
-}
-
-init();
-
+wireFilters();
+wireEditToggle();
+initFirebase();
 </script>
+
 </body>
 </html>
